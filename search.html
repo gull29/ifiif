@@ -1,0 +1,1574 @@
+<!DOCTYPE html><html lang="en" dir="ltr" translate="no" class="no-recently-played exp-B"><head>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="color-scheme" content="only light">
+  <meta name="robots" content="max-image-preview:large">
+  <meta name="description" content="Search all games on The Speghetti Edition.">
+  <meta name="format-detection" content="telephone=no">  <meta name="robots" content="noindex, nofollow">
+  <title>Search - The Speghetti Edition</title>
+  <link rel="preload" href="css/BebasNeue-Regular.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="css/Rubik-Regular-KSXN89k.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="css/Rubik-Bold-H-1e1xp.woff2" as="font" type="font/woff2">
+  <link rel="stylesheet" href="css/style%EF%B9%96v=3.css">
+  <script>
+    (function () {
+      const storageKey = "recentlyPlayedPerLocale";
+      const locale = document.documentElement.lang || "en";
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        const games = Array.isArray(stored[locale])
+          ? stored[locale]
+          : Array.isArray(stored.en)
+            ? stored.en
+            : [];
+        if (!games.length) document.documentElement.classList.add("no-recently-played");
+      } catch (err) {
+        document.documentElement.classList.add("no-recently-played");
+      }
+    })();
+  </script>
+  <style>
+    @font-face {
+      font-family: "Bebas Neue";
+      src: url("css/BebasNeue-Regular.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Rubik";
+      src: url("css/Rubik-Regular-KSXN89k.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Rubik";
+      src: url("css/Rubik-Bold-H-1e1xp.woff2") format("woff2");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style><style>
+    
+
+    :root {
+      --nav-offset: 76px;
+      --page-gutter: clamp(1rem, 4vw, 5rem);
+      --page-max-width: calc(100rem + var(--page-gutter) * 2);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding-top: var(--nav-offset);
+      /* #161616 — the mosaic homepage's --pz-bg, applied site-wide on
+         2026-09-11 at the owner's request. */
+      background-color: var(--pz-bg, #161616);
+      color: #fff;
+    }
+
+    .navbar-left {
+      gap: 12px;
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+
+    .navbar-left a {
+      display: inline-flex;
+      align-items: center;
+      font-size: 30px;
+      white-space: nowrap;
+    }
+
+    .template-spacer {
+      min-height: calc(100vh - var(--nav-offset) - 260px);
+    }
+
+    .pizza-hero-wrap {
+      max-width: var(--page-max-width);
+      margin: 40px auto 56px;
+      padding: 0 var(--page-gutter);
+      width: 100%;
+    }
+
+    .pizza-hero {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .pizza-hero-text {
+      flex: 1 1 560px;
+      max-width: 760px;
+      color: #fff;
+    }
+
+    .pizza-hero-title {
+      margin: 0;
+      font-size: 124px;
+      line-height: 0.95;
+      text-align: left;
+      white-space: nowrap;
+      color: #fff;
+    }
+
+    .pizza-word-glow {
+      background: linear-gradient(90deg, #f0d210, #fc5849, #f0d210);
+      background-size: 220% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pizzaGlowWave 18s linear infinite;
+    }
+
+    .pizza-hero-subtitle {
+      margin: 16px 0 20px;
+      font-size: 38px;
+      line-height: 1.15;
+      color: #fff;
+      max-width: 720px;
+      text-align: left;
+    }
+
+    .pizza-start-btn {
+      display: inline-block;
+      padding: 16px 34px;
+      margin-top: 12px;
+      background-color: #f0d210;
+      color: #111;
+      font-weight: 700;
+      font-size: 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      position: relative;
+      overflow: visible;
+      transition: background-color 0.3s ease;
+    }
+
+    .pizza-start-btn .icon {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      opacity: 0;
+      pointer-events: none;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale(0.5) rotate(0deg);
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      z-index: 1;
+    }
+
+    .pizza-start-btn:hover {
+      background-color: #fc5849;
+    }
+
+    .pizza-start-btn:hover .icon {
+      opacity: 1;
+    }
+
+    .pizza-start-btn:hover .icon-joystick {
+      transform: translate(-50%, -190%) scale(1.08) rotate(-12deg);
+    }
+
+    .pizza-start-btn:hover .icon-controller {
+      transform: translate(-90%, 95%) scale(1.08) rotate(8deg);
+    }
+
+    .pizza-start-btn:hover .icon-laptop {
+      transform: translate(-255%, -125%) scale(1.08) rotate(-6deg);
+    }
+
+    .pizza-start-btn:hover .icon-coin {
+      transform: translate(150%, -165%) scale(1.08) rotate(10deg);
+    }
+
+    .pizza-hero-gallery {
+      display: flex;
+      gap: 20px;
+      height: 400px;
+      overflow: visible;
+    }
+
+    .pizza-slider-wrapper {
+      transform: rotate(5deg);
+      transform-origin: center;
+    }
+
+    .pizza-slider-column {
+      width: 198px;
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .pizza-slider-track {
+      display: flex;
+      flex-direction: column;
+      animation: pizzaScrollUp 24s linear infinite;
+    }
+
+    .pizza-slider-track.reverse {
+      animation: pizzaScrollDown 24s linear infinite;
+    }
+
+    .pizza-slider-track a {
+      display: block;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+
+    .pizza-slider-track img {
+      width: 100%;
+      height: 198px;
+      object-fit: cover;
+      border-radius: 14px;
+      transition: transform 0.25s ease, outline 0.25s ease;
+      outline: 2px solid transparent;
+    }
+
+    .pizza-slider-track a:hover img {
+      transform: scale(1.04);
+      outline: 2px solid #f0d210;
+    }
+
+    @keyframes pizzaGlowWave {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    @keyframes pizzaScrollUp {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    @keyframes pizzaScrollDown {
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+
+    .game-slider-wrap {
+      max-width: var(--page-max-width);
+      margin: 36px auto 0;
+      padding: 0 var(--page-gutter);
+      width: 100%;
+    }
+
+    .game-slider {
+      position: relative;
+    }
+
+    .game-slider-viewport {
+      overflow: hidden;
+    }
+
+    .game-slider-track {
+      display: flex;
+      gap: 12px;
+      transition: transform 0.3s ease-in-out;
+      touch-action: pan-y;
+      will-change: transform;
+    }
+
+    .game-slide {
+      flex: 0 0 clamp(16rem, 12vw + 14rem, 25rem);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #1b1b1b;
+      border: 1px solid #2e2e2e;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    }
+
+    .game-slide a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+
+    .game-slide-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .game-slide-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #1b1b1b;
+      color: #fff;
+    }
+
+    .game-slide-title {
+      font-size: 18px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .game-slide-play {
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 28px;
+      min-width: 112px;
+      background: #f0d210;
+      color: #171717;
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .game-slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 0;
+      background: #f0d210;
+      color: #222;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+      z-index: 2;
+    }
+
+    .game-slider-nav svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .game-slider:hover .game-slider-nav {
+      opacity: 1;
+    }
+
+    .game-slider-prev {
+      left: 8px;
+    }
+
+    .game-slider-next {
+      right: 8px;
+    }
+
+    .continue-playing {
+      max-width: var(--page-max-width);
+      margin: 18px auto 0;
+      padding: 0 var(--page-gutter);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .no-recently-played .continue-playing {
+      display: none;
+    }
+
+    .continue-playing h2 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .continue-playing-track-wrap {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .continue-playing-track {
+      display: flex;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      gap: clamp(.5rem, 1vw, 1rem);
+      padding-bottom: 17px;
+      margin-bottom: -17px;
+      position: relative;
+    }
+
+    .continue-playing-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .continue-playing-item {
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .continue-playing-item img {
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 16 / 9;
+      width: clamp(4.5rem, 6.7vw + 3rem, 8rem);
+      height: clamp(4.5rem, 6.7vw + 3rem, 8rem);
+    }
+
+    .layout-wrapper {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: var(--page-max-width);
+      padding: 0 var(--page-gutter);
+      width: 100%;
+    }
+
+    .all-games-section {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      margin-top: 12px;
+      margin-bottom: 64px;
+    }
+
+    .all-games-section h2 {
+      margin: 0;
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .all-games-section .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .section-more {
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #9a9a9a;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .section-more:hover {
+      color: #f0d210;
+    }
+
+    .game-list-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .game-link {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      border-radius: 16px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .game-thumb {
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #252525;
+    }
+
+    .game-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .game-link-title {
+      font-size: 18px;
+      color: #fff;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .new-badge {
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #fc5849, #f0d210);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+      padding: 4px 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .article-card {
+      width: 100%;
+      margin-top: 2.5rem;
+      margin-bottom: 2rem;
+      border: 1px solid #3d3d3d;
+      border-top: 3px solid #f0d210;
+      border-radius: 1.25rem;
+      background: linear-gradient(180deg, #1e1e1e, #1a1a1a);
+      padding: clamp(1.25rem, 3vw, 2.5rem);
+      color: #fff;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    .article-card h1 {
+      margin: 0.25rem 0 1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .article-card h2 {
+      margin: 2rem 0 0.75rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.5rem, 2.6vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .article-card h2::before {
+      content: "";
+      width: 5px;
+      height: 22px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #f0d210, #fc5849);
+      flex: 0 0 auto;
+    }
+
+    .article-card p {
+      margin: 0 0 1rem;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #c9c9c9;
+    }
+
+    .article-card ul {
+      margin: 0 0 1rem;
+      padding-left: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .article-card li {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #c9c9c9;
+    }
+
+    .article-card li::marker {
+      color: #f0d210;
+    }
+
+    .article-card strong {
+      color: #fff;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 0.75rem;
+    }
+
+    .faq-item {
+      background: #262626;
+      border: 1px solid #2f2f2f;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item[open] {
+      border-color: rgba(240, 210, 16, 0.5);
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 1.25rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.5rem;
+      line-height: 1;
+      color: #f0d210;
+      flex: 0 0 auto;
+      transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item summary:hover {
+      color: #f0d210;
+    }
+
+    .faq-item .faq-body {
+      padding: 0 1.25rem 1.1rem;
+    }
+
+    .faq-item .faq-body p {
+      margin: 0;
+    }
+
+    
+
+    @media (max-width: 1100px) {
+      .pizza-hero-title {
+        font-size: 70px;
+      }
+
+      .pizza-hero-subtitle {
+        font-size: 23px;
+      }
+
+      .pizza-hero-gallery {
+        height: 320px;
+      }
+
+      .pizza-slider-column {
+        width: 156px;
+        height: 320px;
+      }
+
+      .pizza-slider-track img {
+        height: 156px;
+      }
+    }
+
+    @media (max-width: 1600px) {
+      .pizza-hero-wrap {
+        max-width: 1320px;
+        padding: 0 24px;
+      }
+
+      .pizza-hero {
+        gap: 16px;
+      }
+
+      .pizza-hero-title {
+        font-size: 102px;
+      }
+
+      .pizza-hero-subtitle {
+        font-size: 33px;
+        max-width: 690px;
+      }
+
+      .pizza-start-btn {
+        margin-top: 10px;
+        font-size: 26px;
+        padding: 15px 32px;
+      }
+
+      .pizza-hero-gallery {
+        gap: 14px;
+        height: 360px;
+      }
+
+      .pizza-slider-column {
+        width: 176px;
+        height: 360px;
+      }
+
+      .pizza-slider-track img {
+        height: 176px;
+      }
+    }
+
+    @media (max-width: 1250px) {
+      .pizza-hero {
+        justify-content: center;
+        gap: 12px;
+      }
+
+      .pizza-hero-text {
+        flex: 1 1 500px;
+        max-width: 620px;
+      }
+
+      .pizza-hero-title {
+        font-size: 82px;
+      }
+
+      .pizza-hero-subtitle {
+        display: block;
+        font-size: 27px;
+        max-width: 580px;
+      }
+
+      .pizza-hero-gallery {
+        display: flex;
+        gap: 10px;
+        height: 280px;
+      }
+
+      .pizza-slider-column {
+        width: 136px;
+        height: 280px;
+      }
+
+      .pizza-slider-track img {
+        height: 136px;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .pizza-hero-text {
+        max-width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .pizza-hero-title {
+        text-align: center;
+        font-size: clamp(5.4rem, 9.8vw, 6.8rem);
+      }
+
+      .pizza-hero-subtitle {
+        display: none;
+      }
+
+      .pizza-hero-gallery {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1450px) {
+      .game-slide {
+        flex: 0 0 clamp(13.5rem, 10vw + 11rem, 19rem);
+      }
+
+      .game-slide-info {
+        padding: 10px 12px;
+      }
+
+      .game-slide-title {
+        font-size: 16px;
+      }
+
+      .game-slide-play {
+        min-width: 98px;
+        padding: 7px 18px;
+        font-size: 13px;
+      }
+
+      .continue-playing-item img {
+        width: clamp(4rem, 5.2vw + 2.6rem, 6.8rem);
+        height: clamp(4rem, 5.2vw + 2.6rem, 6.8rem);
+      }
+    }
+
+    @media (max-width: 1360px) {
+      .game-slider-wrap,
+      .continue-playing,
+      .layout-wrapper {
+        max-width: 1240px;
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .game-slide {
+        flex: 0 0 clamp(12.75rem, 9vw + 10.8rem, 18rem);
+      }
+
+      .continue-playing-item img {
+        width: clamp(3.8rem, 4.8vw + 2.4rem, 6.2rem);
+        height: clamp(3.8rem, 4.8vw + 2.4rem, 6.2rem);
+      }
+
+      .game-list-layout {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 1450px) and (min-width: 1251px) {
+      .pizza-hero-wrap {
+        max-width: 1180px;
+        padding: 0 16px;
+      }
+
+      .pizza-hero {
+        gap: 8px;
+      }
+
+      .pizza-hero-text {
+        flex: 1 1 500px;
+        max-width: 620px;
+      }
+
+      .pizza-hero-title {
+        font-size: 90px;
+      }
+
+      .pizza-hero-subtitle {
+        font-size: 29px;
+        max-width: 610px;
+      }
+
+      .pizza-start-btn {
+        font-size: 24px;
+        padding: 14px 28px;
+      }
+
+      .pizza-hero-gallery {
+        gap: 10px;
+        height: 320px;
+      }
+
+      .pizza-slider-column {
+        width: 156px;
+        height: 320px;
+      }
+
+      .pizza-slider-track img {
+        height: 156px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pizza-hero-title {
+        font-size: clamp(3.6rem, 11.8vw, 5.4rem);
+      }
+
+      .pizza-start-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pizza-hero-title {
+        font-size: clamp(2.8rem, 12vw, 4.4rem);
+      }
+    }
+
+      .navbar-left {
+        margin-left: 0;
+        }
+
+      .navbar-left img {
+      display: block;
+      width: 50px;
+      min-width: 24px;
+      max-width: 70px;
+      max-height: none;
+      height: auto;
+      }
+
+      .navbar-left a {
+      margin-left: 0;
+      }
+
+      @media (max-width: 800px) {
+        .navbar-left a:last-child {
+          display: none;
+        }
+      }
+
+      @media (max-width: 760px) {
+      :root {
+      --nav-offset: 68px;
+      }
+      .navbar-left a, .navbar-right a {
+      font-size: 17px;
+      }
+      .navbar-left img,
+      .navbar-right .navbar-img-link img {
+      width: 34px !important;
+      min-width: 28px;
+      }
+      }
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+    }
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    @media (max-width: 500px) {
+      :root {
+        --nav-offset: 104px;
+      }
+    }
+  </style>
+
+<script src="jsload/loadbar.js"></script><style>#pageLoadBar{position:fixed;top:0;left:0;height:3px;width:100%;background:linear-gradient(90deg,#f0d210,#fc5849);transform-origin:0 50%;transform:scaleX(0);transition:transform .25s ease,opacity .4s ease;z-index:2147483647;pointer-events:none;box-shadow:0 0 8px rgba(240,210,16,.55);}</style>
+
+  <style id="pz-nav-styles">
+    @font-face { font-family: "Rubik"; src: url("css/Rubik-Regular-KSXN89k.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Rubik"; src: url("css/Rubik-Bold-H-1e1xp.woff2") format("woff2"); font-weight: 500 800; font-style: normal; font-display: swap; }
+    :root { --pz-accent: #f0d210; --pz-hot: #fc5849; --pz-bg: #161616; --pz-panel: #1f1f1f; --pz-line: rgba(255,255,255,.1); --pz-text: #fff; --pz-muted: #a7a7a7; }
+    .pz-skip { position: absolute; left: -999px; top: 8px; background: var(--pz-accent); color: #111; padding: 8px 14px; border-radius: 8px; z-index: 2000; font-family: Rubik, sans-serif; font-weight: 700; }
+    .pz-skip:focus { left: 8px; }
+
+    /* ---------- nav ---------- */
+    .pz-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(20,20,20,.1); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-bottom: 1px solid rgba(95,95,95,.45); font-family: "Bebas Neue", "Bebas Neue Fallback", sans-serif; }
+    .pz-nav-inner { max-width: 1500px; margin: 0 auto; height: 59px; padding: 0 16px; display: flex; align-items: center; gap: 14px; }
+    /* brand: original markup + original cascade (inline .navbar-left rules + css/style.css), nothing overridden */
+    .pz-nav .navbar-left { flex: 0 0 auto; }
+    .pz-links { display: flex; align-items: center; gap: 4px; margin-left: 6px; }
+    .pz-link { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 10px; color: #fff; text-decoration: none; font-size: 21px; letter-spacing: .03em; background: transparent; border: 0; cursor: pointer; font-family: inherit; transition: background-color .15s ease, color .15s ease; white-space: nowrap; }
+    .pz-link svg { width: 19px; height: 19px; flex: 0 0 auto; }
+    .pz-link:hover, .pz-link:focus-visible { background: rgba(255,255,255,.08); color: var(--pz-accent); outline: none; }
+    .pz-random svg { transition: transform .3s ease; }
+    .pz-random:hover svg { transform: rotate(20deg); }
+    .pz-menu { position: relative; }
+    .pz-menu-btn svg:last-child { transition: transform .2s ease; }
+    .pz-menu.open .pz-menu-btn { background: rgba(255,255,255,.08); color: var(--pz-accent); }
+    .pz-menu.open .pz-menu-btn svg:last-child { transform: rotate(180deg); }
+    .pz-menu-panel { position: absolute; top: calc(100% + 10px); left: 0; width: 460px; background: var(--pz-panel); border: 1px solid var(--pz-line); border-radius: 16px; padding: 12px; box-shadow: 0 18px 50px rgba(0,0,0,.55); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .15s ease, transform .15s ease, visibility .15s; }
+    .pz-menu.open .pz-menu-panel { opacity: 1; visibility: visible; transform: translateY(0); }
+    .pz-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .pz-menu-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; color: #fff; text-decoration: none; font-size: 20px; letter-spacing: .03em; }
+    .pz-menu-item:hover { background: rgba(255,255,255,.08); color: var(--pz-accent); }
+    .pz-cat-badge { width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.07); border-radius: 8px; color: #ddd; flex: 0 0 auto; }
+    .pz-cat-icon { width: 19px; height: 19px; }
+    .pz-menu-item:hover .pz-cat-badge, .pz-mobile-cat:hover .pz-cat-badge { background: var(--pz-accent); color: #111; }
+    .pz-menu-all { display: block; margin: 10px 4px 2px; padding-top: 10px; border-top: 1px solid var(--pz-line); color: var(--pz-muted); text-decoration: none; font-family: Rubik, sans-serif; font-size: 13px; font-weight: 700; }
+    .pz-menu-all:hover { color: var(--pz-accent); }
+
+    /* ---------- search ---------- */
+    .pz-search { position: relative; margin-left: auto; flex: 0 1 420px; min-width: 200px; }
+    .pz-search form { position: relative; display: flex; align-items: center; margin: 0; }
+    .pz-search-icon { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: #9a9a9a; pointer-events: none; display: inline-flex; }
+    .pz-search-icon svg { width: 20px; height: 20px; }
+    .pz-nav .pz-search input { width: 100% !important; height: 42px; padding: 0 44px 0 42px !important; border-radius: 12px !important; border: 1.5px solid #3a3a3a !important; background: #262626 !important; color: #fff; font-family: Rubik, sans-serif !important; font-size: 15px !important; font-weight: 500; transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease; outline: none; }
+    .pz-nav .pz-search input::placeholder { color: #9a9a9a; font-family: Rubik, sans-serif; }
+    .pz-nav .pz-search.open input, .pz-nav .pz-search input:focus { border-color: var(--pz-accent) !important; background: #1c1c1c !important; box-shadow: 0 0 0 3px rgba(240,210,16,.25) !important; }
+    .pz-nav .pz-search .pz-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,.12); color: #ddd; font: 700 12px/1 Rubik, sans-serif; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+    .pz-nav .pz-search .pz-clear:hover { background: var(--pz-accent); color: #111; }
+    .pz-nav .pz-search .pz-clear[hidden] { display: none; }
+    .pz-kbd { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font: 700 12px/1 Rubik, sans-serif; color: #9a9a9a; background: #333; border: 1px solid #444; border-bottom-width: 2px; border-radius: 6px; padding: 4px 7px; pointer-events: none; }
+    .pz-nav .pz-search.open .pz-kbd, .pz-nav .pz-search input:focus ~ .pz-kbd, .pz-nav .pz-search input:not(:placeholder-shown) ~ .pz-kbd { display: none; }
+    .pz-nav .pz-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: min(520px, calc(100vw - 32px)); background: var(--pz-panel); border: 1px solid var(--pz-line); border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.55); padding: 0; display: none; overflow: hidden; }
+    .pz-nav .pz-search.open .pz-dropdown { display: block; }
+    .pz-nav .pz-dd-results { padding: 8px 8px 0; max-height: 600px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; scrollbar-width: thin; scrollbar-color: #555 transparent; }
+    .pz-nav .pz-dropdown .pz-opt { display: flex; align-items: center; gap: 12px; padding: 7px 10px; border-radius: 12px; border: 1px solid transparent; text-decoration: none; color: #fff; background: transparent; transition: background-color .12s ease, border-color .12s ease; }
+    .pz-nav .pz-dropdown .pz-opt:hover { transform: none; }
+    .pz-nav .pz-dropdown .pz-opt:hover, .pz-nav .pz-dropdown .pz-opt.is-active { background: rgba(255,255,255,.07); border-color: var(--pz-line); }
+    .pz-nav .pz-dropdown .pz-opt-thumb { width: 48px; height: 48px; border-radius: 12px; object-fit: cover; flex: 0 0 auto; }
+    .pz-nav .pz-dropdown .pz-opt-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .pz-nav .pz-dropdown .pz-opt-title { font-family: Rubik, sans-serif; font-size: 15px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pz-nav .pz-dropdown .pz-opt-desc { font-family: Rubik, sans-serif; font-size: 12px; font-weight: 500; color: var(--pz-muted); }
+    .pz-nav .pz-dropdown .pz-opt-caticon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,.07); color: #ddd; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .pz-nav .pz-dropdown .pz-opt-caticon svg { width: 22px; height: 22px; }
+    .pz-nav .pz-dropdown .pz-opt-count { margin-left: auto; flex: 0 0 auto; font: 700 12px/1 Rubik, sans-serif; color: #ddd; background: rgba(255,255,255,.08); border: 1px solid var(--pz-line); border-radius: 999px; padding: 6px 10px; }
+    .pz-nav .pz-dropdown .pz-opt.is-active .pz-opt-count, .pz-nav .pz-dropdown .pz-opt:hover .pz-opt-count { background: var(--pz-accent); border-color: var(--pz-accent); color: #111; }
+    .pz-nav .pz-dropdown .pz-opt-empty { padding: 12px 10px; color: #fff; }
+    .pz-nav .pz-dropdown .pz-opt-all { position: sticky; bottom: 0; margin: 4px -8px 0; border-top: 1px solid var(--pz-line); border-radius: 0; background: var(--pz-panel); padding: 12px 18px; gap: 10px; }
+    .pz-nav .pz-dropdown .pz-opt-all-icon { width: 30px; height: 30px; border-radius: 8px; background: rgba(255,255,255,.07); color: #ddd; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .pz-nav .pz-dropdown .pz-opt-all-icon svg { width: 16px; height: 16px; }
+    .pz-nav .pz-dropdown .pz-opt-all-text { font: 600 14px/1.3 Rubik, sans-serif; color: #fff; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .pz-nav .pz-dropdown .pz-opt-all-text b { color: var(--pz-accent); }
+    .pz-nav .pz-dropdown .pz-opt-all-count { margin-left: auto; font: 700 12px/1 Rubik, sans-serif; color: var(--pz-muted); white-space: nowrap; }
+    .pz-nav .pz-dropdown .pz-opt-all-arrow { color: var(--pz-accent); font-weight: 700; flex: 0 0 auto; }
+    .pz-nav .pz-dropdown .pz-opt-all:hover .pz-opt-all-icon, .pz-nav .pz-dropdown .pz-opt-all.is-active .pz-opt-all-icon { background: var(--pz-accent); color: #111; }
+
+    .pz-icon-btn { width: 40px; height: 40px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: transparent; border: 0; cursor: pointer; flex: 0 0 auto; transition: background-color .15s ease, color .15s ease; }
+    .pz-icon-btn svg { width: 22px; height: 22px; transition: transform .35s ease; }
+    .pz-icon-btn:hover, .pz-icon-btn:focus-visible { background: rgba(255,255,255,.08); color: var(--pz-accent); outline: none; }
+    .pz-icon-btn:hover svg { transform: rotate(45deg); }
+    .pz-burger { display: none; }
+    .pz-burger:hover svg { transform: none; }
+
+    /* mobile panel */
+    .pz-mobile { display: none; max-width: 1500px; margin: 0 auto; padding: 8px 16px 16px; border-top: 1px solid var(--pz-line); }
+    .pz-mobile:not([hidden]) { display: block; }
+    .pz-mobile-link { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 10px; border-radius: 10px; color: #fff; text-decoration: none; font-size: 22px; letter-spacing: .03em; background: none; border: 0; font-family: inherit; text-align: left; cursor: pointer; }
+    .pz-mobile-link svg { width: 20px; height: 20px; }
+    .pz-mobile-link:hover { background: rgba(255,255,255,.08); color: var(--pz-accent); }
+    .pz-mobile-title { font-family: Rubik, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #8d8d8d; margin: 10px 10px 6px; }
+    .pz-mobile-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 8px; }
+    .pz-mobile-cat { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px; color: #fff; text-decoration: none; font-size: 20px; letter-spacing: .03em; }
+    .pz-mobile-cat:hover { background: rgba(255,255,255,.08); color: var(--pz-accent); }
+
+    @media (max-width: 1100px) { .pz-links .pz-link span { display: none; } .pz-links .pz-link { padding: 0 10px; } .pz-menu-btn svg:last-child { display: none; } }
+    @media (max-width: 900px) { .pz-links { display: none; } .pz-burger { display: inline-flex; } .pz-search { flex: 1 1 auto; }  }
+    @media (max-width: 600px) { .pz-nav .navbar-left a:last-child { display: none; } .pz-nav-inner { padding: 0 12px; gap: 8px; } .pz-kbd { display: none; } .pz-nav .pz-dropdown { position: fixed; top: 60px; left: 8px; right: 8px; width: auto; } }
+
+  </style>
+  
+  <style id="search-page-styles">
+    .pz-results { padding-top: 24px; }
+    .pz-results-inner { max-width: 1500px; margin: 0 auto; padding: 0 16px 48px; font-family: Rubik, sans-serif; }
+    .pz-results-inner #search-results { padding: 0; margin-top: 0; }
+    .pz-results-inner #search-results .overlay { font-family: "Bebas Neue", "Bebas Neue Fallback", sans-serif; font-weight: 400; letter-spacing: .02em; }
+    .pz-results-kicker { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #8d8d8d; }
+    .pz-results-title { margin: 4px 0 6px; font-family: "Bebas Neue", "Bebas Neue Fallback", sans-serif; font-weight: 400; font-size: clamp(2rem, 4vw, 3rem); color: #fff; letter-spacing: .02em; }
+    .pz-results-title b { color: var(--pz-accent); font-weight: 400; }
+    .pz-results-meta { margin: 0 0 18px; color: #a7a7a7; font-size: 14px; }
+    .pz-results-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .pz-results-cats a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; }
+    .pz-results-cats a svg { width: 18px; height: 18px; }
+    .pz-results-cats a span { color: #a7a7a7; font-weight: 600; }
+    .pz-results-cats a:hover { background: var(--pz-accent); border-color: var(--pz-accent); color: #111; }
+    .pz-results-cats a:hover span { color: #333; }
+    #search-results {
+      max-width: 1500px;
+      margin: 16px auto 0;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    #search-results .game {
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+    }
+
+    #search-results .game a {
+      display: block;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      background: #252525;
+    }
+
+    #search-results .game img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 16px;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    /* Same tile treatment as /g (style/searchpage.css): zoom inside the
+       clipped link, name slides up along the bottom, always on for touch. */
+    #search-results .game:hover img {
+      transform: scale(1.04);
+    }
+
+    #search-results .overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 26px 10px 10px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+      color: #fff;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.1;
+      text-align: center;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    #search-results .game:hover .overlay {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (hover: none) {
+      #search-results .overlay {
+        opacity: 1;
+        transform: none;
+        padding-top: 26px;
+        background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.75) 100%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      #search-results {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+      #search-results .overlay {
+        font-size: 17px;
+      }
+    }
+    .pz-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 10px; background: var(--pz-accent); color: #111; font: 700 14px/1 Rubik, sans-serif; text-decoration: none; }
+    .pz-btn:hover { background: var(--pz-hot); color: #fff; }
+  </style>
+  <script defer="" src="experiment%EF%B9%96v=6.js"></script>
+<style id="pzExpNavCss">.pz-exp-nav3{display:none}@media (max-width:900px){.pz-nav .pz-exp-nav3{display:flex;align-items:center;gap:2px;margin-left:auto;flex:0 0 auto}.pz-nav .pz-nav-inner>a.pz-icon-btn,.pz-nav .pz-burger,.pz-nav .pz-mobile{display:none!important}.pz-nav .pz-search{display:none}.pz-nav.pz-exp-search-open .pz-nav-inner{gap:8px}.pz-nav.pz-exp-search-open .pz-search{display:block;flex:1 1 auto;min-width:0;margin-left:0}.pz-nav.pz-exp-search-open .navbar-left,.pz-nav.pz-exp-search-open .pz-exp-allgames,.pz-nav.pz-exp-search-open .pz-exp-settings{display:none}.pz-nav .pz-exp-ico-close{display:none}.pz-nav.pz-exp-search-open .pz-exp-ico-search{display:none}.pz-nav.pz-exp-search-open .pz-exp-ico-close{display:block}.pz-nav .pz-exp-allgames:hover svg,.pz-nav .pz-exp-searchbtn:hover svg{transform:none}.pz-nav.pz-exp-search-open{background:var(--pz-bg,#161616)}.pz-nav.pz-exp-search-open .pz-exp-cats{display:block}.pz-nav.pz-exp-search-open.pz-exp-typing .pz-exp-cats{display:none}}.pz-exp-cats{display:none;max-width:1500px;margin:0 auto;padding:2px 16px 14px;border-top:1px solid var(--pz-line,rgba(255,255,255,.1));max-height:calc(100vh - 59px);overflow-y:auto;-webkit-overflow-scrolling:touch}.pz-exp-cats-title{font-family:Rubik,sans-serif;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8d8d8d;margin:12px 10px 6px}.pz-exp-cats-all{display:block;margin:8px 0 2px;padding:11px 10px;border-radius:10px;background:rgba(255,255,255,.06);color:#fff;text-decoration:none;font-family:inherit;font-size:20px;letter-spacing:.03em}.pz-exp-cats-all:hover,.pz-exp-cats-all:focus-visible{background:var(--pz-accent,#f0d210);color:#111}</style><style>.back-to-top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:0;background:#f0d210;color:#171717;cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,transform .25s cubic-bezier(.2,.9,.3,1.2),background-color .2s ease;box-shadow:0 8px 24px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;}.back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}.back-to-top:hover{background:#fc5849;color:#fff;}.back-to-top svg{width:22px;height:22px;display:block;}@media (max-width:500px){.back-to-top{right:14px;bottom:14px;width:42px;height:42px;}}</style><style>.pz-preview-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:inherit;display:block;z-index:0;pointer-events:none;background:transparent;opacity:0;transition:opacity .18s ease}.pz-preview-video.pz-preview-shown{opacity:1}</style></head>
+<body>
+  
+
+  <header class="pz-nav" id="pzNav">
+    <div class="pz-nav-inner">
+      <div class="navbar-left">
+      <a href="index.html">
+        <img src="images/speghettilogo.png" alt="Site Logo" width="30" height="30">
+      </a>
+      <a href="index.html">The Speghetti Edition</a>
+      </div>
+
+      <nav class="pz-links" aria-label="Primary">
+        <a href="g.html" class="pz-link"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"></rect></svg><span>All Games</span></a>
+        <div class="pz-menu" id="pzCats">
+          <button class="pz-link pz-menu-btn" type="button" aria-expanded="false" aria-controls="pzCatsPanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h6.1a2 2 0 0 1 1.4.6l8.4 8.4a1.5 1.5 0 0 1 0 2.1l-5.3 5.3a1.5 1.5 0 0 1-2.1 0L4.6 12A2 2 0 0 1 4 10.6V5.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><circle cx="8" cy="8" r="1.4" fill="currentColor"></circle></svg><span>Categories</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+          <div class="pz-menu-panel" id="pzCatsPanel" role="menu" aria-label="Game categories">
+            <div class="pz-menu-grid">
+<a href="g/action.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M7.307 3.627A1.25 1.25 0 0 1 8.5 2.75H14a1.25 1.25 0 0 1 1.142 1.758L13.924 7.25H17.5a1.25 1.25 0 0 1 1.026 1.964l-8 11.5a1.25 1.25 0 0 1-2.255-.944l1.223-6.52H6a1.25 1.25 0 0 1-1.193-1.623zM9.419 5.25 7.7 10.75H11a1.25 1.25 0 0 1 1.229 1.48l-.426 2.27 3.305-4.75H12a1.25 1.25 0 0 1-1.142-1.758l1.219-2.742z" clip-rule="evenodd"></path></svg></span>Action</a>
+<a href="g/racing.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M19.32 4.96h-6.13c-.21-.88-1-1.53-1.94-1.53H5.18c0-.69-.56-1.25-1.25-1.25s-1.25.57-1.25 1.26v17.12a1.25 1.25 0 0 0 2.5 0v-4.02h6.13c.21.87 1 1.53 1.94 1.53h6.07a2 2 0 0 0 2-2V6.96a2 2 0 0 0-2-2M5.18 11.51V8.48h3.03V5.45h3.04v3.03H8.22v3.03h3.03v3.04H8.21v-3.04zm14.14-1.52h-3.03v3.03h3.03v3.04h-3.03v-3.03h-3.03V9.99h3.03V6.96h3.03z"></path></svg></span>Racing</a>
+<a href="g/sports.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M9.534 8.866a6.04 6.04 0 0 1 2.662.736c.286-.44.782-.733 1.347-.733H18.5a2.276 2.276 0 0 1 2.15 3.02l-.001.001-.425 1.225a3.28 3.28 0 0 1-3.094 2.201h-1.784a6.07 6.07 0 0 1-5.743 5.676L9.292 21a6.07 6.07 0 0 1-6.062-5.757l-.008-.312a6.07 6.07 0 0 1 6.07-6.07zm-4.032 6.26a3.794 3.794 0 0 0 3.79 3.598l.195-.005a3.795 3.795 0 0 0 3.594-3.593l.004-.195c0-.914.705-1.89 1.836-1.89h2.21l.158-.012c.36-.057.665-.308.788-.66l.423-1.224h-4.433a1.73 1.73 0 0 1-.888.846c-.484.206-1.15.227-1.708-.166a3.77 3.77 0 0 0-1.878-.677l-.302-.011a3.794 3.794 0 0 0-3.793 3.794zm9.204-11.342a1 1 0 1 1 1.841.782l-.629 1.481a1 1 0 0 1-1.842-.781zm-3.851-.768a1 1 0 0 1 1.161.808l.247 1.375a1 1 0 0 1-1.969.353l-.247-1.375a1 1 0 0 1 .808-1.16M6.743 4.8a1 1 0 0 1 1.387.274l.792 1.183A1 1 0 0 1 7.26 7.37l-.792-1.182A1 1 0 0 1 6.743 4.8"></path></svg></span>Sports</a>
+<a href="g/puzzle.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.629 3.97a1.185 1.185 0 0 0-1.28 1.457 1.25 1.25 0 0 1-1.216 1.54h-3.45v1.918c.321.064.65.178.985.352 1.051.55 1.857 1.597 1.995 2.86v.004a3.683 3.683 0 0 1-2.98 4.017v1.917H7.88a3.7 3.7 0 0 1 .359-.995c.552-1.045 1.598-1.854 2.867-1.986a3.68 3.68 0 0 1 4.01 2.981h2.197v-3.17a1.25 1.25 0 0 1 1.541-1.216 1.18 1.18 0 0 0 1.454-1.289c-.035-.327-.252-.664-.603-.874q-.035-.014-.068-.03a1.08 1.08 0 0 0-.797-.1 1.25 1.25 0 0 1-1.53-1.22v-3.17h-3.45a1.25 1.25 0 0 1-1.217-1.538 1.05 1.05 0 0 0-.1-.787c-.202-.389-.563-.632-.915-.67m8.181 4.918q.405.079.823.272.083.029.162.07c1.048.547 1.862 1.592 2 2.86a3.68 3.68 0 0 1-2.98 4.028v2.167a2.25 2.25 0 0 1-2.25 2.25h-3.701a1.25 1.25 0 0 1-1.216-1.54 1.18 1.18 0 0 0-1.282-1.455c-.346.036-.708.275-.916.669l-.001.002c-.084.158-.12.292-.13.406q-.02.174.03.378a1.25 1.25 0 0 1-1.216 1.54h-3.7a2.25 2.25 0 0 1-2.25-2.25v-3.42a1.25 1.25 0 0 1 1.54-1.216 1.18 1.18 0 0 0 1.454-1.28c-.038-.353-.28-.713-.667-.916h-.001a1.05 1.05 0 0 0-.788-.1 1.25 1.25 0 0 1-1.539-1.216v-3.42a2.25 2.25 0 0 1 2.25-2.25H7.88a3.683 3.683 0 0 1 4.018-2.98h.003c1.264.137 2.311.944 2.86 1.995.175.334.288.663.352.985h2.448a2.25 2.25 0 0 1 2.25 2.25z"></path></svg></span>Puzzle</a>
+<a href="g/platformer.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12.004 3.188a3.25 3.25 0 0 1 1 6.341v.393h3.559a4.25 4.25 0 0 1 4.25 4.25v4.39a2.25 2.25 0 0 1-2.25 2.25H5.438a2.25 2.25 0 0 1-2.25-2.25v-4.39a4.25 4.25 0 0 1 4.25-4.25h3.567v-.393a3.25 3.25 0 0 1 .999-6.341m-4.566 9.234a1.75 1.75 0 0 0-1.75 1.75v1.015c0 .415.335.75.75.75h11.125a.75.75 0 0 0 .75-.75v-1.015a1.75 1.75 0 0 0-1.75-1.75h-3.558v.887a1 1 0 0 1-2 0v-.887zm4.566-7.235a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5" clip-rule="evenodd"></path></svg></span>Platformer</a>
+<a href="g/shooter.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M17.75 12a5.75 5.75 0 1 0-11.5 0 5.75 5.75 0 0 0 11.5 0m2.5 0a8.25 8.25 0 1 1-16.5 0 8.25 8.25 0 0 1 16.5 0"></path><path fill="currentColor" d="M11 3a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm0 14a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm9.996-6a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm-14 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm6.504 1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"></path></svg></span>Shooter</a>
+<a href="g/2player.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M8.03 12.74c.532 0 .963.43.963.962v.482h.482a.963.963 0 0 1 0 1.925h-.482v.482a.963.963 0 0 1-1.926 0v-.482h-.481a.963.963 0 0 1 0-1.925h.481v-.482c0-.531.432-.963.963-.963m4.35 2.889a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m1.926-1.926a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m3.084-5.598a.963.963 0 1 1-.001 1.926.963.963 0 0 1 0-1.926"></path><path fill="currentColor" fill-rule="evenodd" d="M13.538 1.63a1 1 0 0 1 1 1v1.157h1.889a5.824 5.824 0 0 1 2.72 10.972q.019.222.02.45a5.824 5.824 0 0 1-5.823 5.823H7.565a5.823 5.823 0 0 1-2.721-10.971 5.824 5.824 0 0 1 5.805-6.273h1.89V2.63a1 1 0 0 1 1-1M7.565 11.886a3.323 3.323 0 0 0 0 6.646h5.779a3.324 3.324 0 0 0 0-6.646zm3.083-5.599a3.324 3.324 0 0 0-3.315 3.105q.116-.005.232-.006h1.157a.96.96 0 0 1 .948-.801h.481v-.481a.963.963 0 0 1 1.926 0v.481h.482c.477 0 .872.349.948.805a5.82 5.82 0 0 1 4.877 2.905 3.324 3.324 0 0 0-1.957-6.008z" clip-rule="evenodd"></path></svg></span>2 Player</a>
+<a href="g/clicker.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M13.724 10.357c.367.383.782.367 1.214-.032.399-.4.495-.879.095-1.278a3.87 3.87 0 0 0-2.042-1.068v-.287a.999.999 0 0 0-1.997 0v.332c-1.837.441-3.07 1.992-3.07 3.994 0 1.99 1.233 3.55 3.07 3.994v.333a.999.999 0 0 0 1.997 0v-.29a3.9 3.9 0 0 0 2.043-1.081c.43-.415.367-.91-.017-1.31-.415-.4-.878-.4-1.277 0a2.5 2.5 0 0 1-.749.534V9.829l.014.007c.267.125.503.305.718.52m-3.915 1.661c0 .903.451 1.697 1.185 2.095v-4.2c-.734.402-1.185 1.204-1.185 2.106" clip-rule="evenodd"></path></svg></span>Clicker &amp; Idle</a>
+<a href="g/horror.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.297 12.204a5.75 5.75 0 0 1 .857-6.289 5.7 5.7 0 0 0-2.224.565 5.745 5.745 0 0 0-2.689 7.675 5.745 5.745 0 0 0 9.5 1.302 5.75 5.75 0 0 1-5.444-3.253m2.252-1.084a3.244 3.244 0 0 0 4.338 1.52q.334-.162.562-.346a1.25 1.25 0 0 1 2 1.262 8.245 8.245 0 0 1-15.46 1.683A8.245 8.245 0 0 1 8.846 4.228a8.21 8.21 0 0 1 7.11-.018 1.25 1.25 0 0 1-.227 2.34 3.244 3.244 0 0 0-2.18 4.57"></path></svg></span>Horror</a>
+<a href="g/casual.html" class="pz-menu-item"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M9.371 13.527a1 1 0 0 1 1.288.584 1.433 1.433 0 0 0 2.682 0 1 1 0 1 1 1.872.704 3.433 3.433 0 0 1-6.426 0 1 1 0 0 1 .584-1.288" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M9.65 10.471a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0m5.626 0a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0" clip-rule="evenodd"></path></svg></span>Casual</a>
+            </div>
+            <a href="g.html" class="pz-menu-all">Browse all 278+ games →</a>
+          </div>
+        </div>
+        <button class="pz-link pz-random" type="button" data-random=""><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2"></rect><circle cx="8" cy="8" r="1.7" fill="currentColor"></circle><circle cx="12" cy="12" r="1.7" fill="currentColor"></circle><circle cx="16" cy="16" r="1.7" fill="currentColor"></circle></svg><span>Random</span></button>
+      </nav>
+
+      <div class="pz-search" id="navbarSearch">
+        <form action="search.html" method="GET" role="search">
+          <span class="pz-search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"></circle><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></span>
+          <input type="text" name="q" placeholder="Search 278+ games" aria-label="Search for games" autocomplete="off" spellcheck="false">
+          <kbd class="pz-kbd" aria-hidden="true">/</kbd>
+        <button type="button" class="pz-clear" aria-label="Clear search" hidden="">✕</button></form>
+        <div class="pz-dropdown">
+          <div class="pz-dd-results" id="searchResults"></div>
+        </div>
+      </div>
+
+      <a href="settings.html" class="pz-icon-btn" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.4-3.5.1-1.2 2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-2-1.2l-.4-2.6H9.3l-.4 2.6c-.7.3-1.4.7-2 1.2l-2.4-1-2 3.4 2 1.6a8 8 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1c.6.5 1.3.9 2 1.2l.4 2.6h5.4l.4-2.6c.7-.3 1.4-.7 2-1.2l2.4 1 2-3.4-2-1.6.1-1.2Z"></path></svg></a>
+      <button class="pz-icon-btn pz-burger" type="button" id="pzBurger" aria-label="Open menu" aria-expanded="false" aria-controls="pzMobile"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg></button>
+    <div class="pz-exp-nav3" id="pzExpNav3"><a class="pz-icon-btn pz-exp-allgames" href="g.html" aria-label="All games" title="All games"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.7 12.6A4.2 4.2 0 0 1 1.3 10.8V9.7a4.2 4.2 0 0 1 4.2-4.2h8.6a4.2 4.2 0 0 1 4.1 3.4"></path><rect x="4.5" y="8.9" width="17" height="9.5" rx="4.2"></rect><path d="M9.3 11.65v4M7.3 13.65h4"></path><circle cx="16.3" cy="12.2" r="1" fill="currentColor" stroke="none"></circle><circle cx="18.6" cy="14.9" r="1" fill="currentColor" stroke="none"></circle></svg></a><button type="button" class="pz-icon-btn pz-exp-searchbtn" aria-label="Search" aria-expanded="false" aria-controls="navbarSearch" title="Search"><svg class="pz-exp-ico-search" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.2"></circle><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg><svg class="pz-exp-ico-close" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path></svg></button><a class="pz-icon-btn pz-exp-settings" href="settings.html" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.4-3.5.1-1.2 2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-2-1.2l-.4-2.6H9.3l-.4 2.6c-.7.3-1.4.7-2 1.2l-2.4-1-2 3.4 2 1.6a8 8 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1c.6.5 1.3.9 2 1.2l.4 2.6h5.4l.4-2.6c.7-.3 1.4-.7 2-1.2l2.4 1 2-3.4-2-1.6.1-1.2Z"></path></svg></a></div></div>
+
+    <div class="pz-mobile" id="pzMobile" hidden="">
+      <a href="g.html" class="pz-mobile-link"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="14" y="3" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="3" y="14" width="7" height="7" rx="1.5" fill="currentColor"></rect><rect x="14" y="14" width="7" height="7" rx="1.5" fill="currentColor"></rect></svg>All Games</a>
+      <button type="button" class="pz-mobile-link" data-random=""><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="2"></rect><circle cx="8" cy="8" r="1.7" fill="currentColor"></circle><circle cx="12" cy="12" r="1.7" fill="currentColor"></circle><circle cx="16" cy="16" r="1.7" fill="currentColor"></circle></svg>Random game</button>
+      <div class="pz-mobile-title">Categories</div>
+      <div class="pz-mobile-cats">
+<a href="g/action.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M7.307 3.627A1.25 1.25 0 0 1 8.5 2.75H14a1.25 1.25 0 0 1 1.142 1.758L13.924 7.25H17.5a1.25 1.25 0 0 1 1.026 1.964l-8 11.5a1.25 1.25 0 0 1-2.255-.944l1.223-6.52H6a1.25 1.25 0 0 1-1.193-1.623zM9.419 5.25 7.7 10.75H11a1.25 1.25 0 0 1 1.229 1.48l-.426 2.27 3.305-4.75H12a1.25 1.25 0 0 1-1.142-1.758l1.219-2.742z" clip-rule="evenodd"></path></svg></span>Action</a>
+<a href="g/racing.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M19.32 4.96h-6.13c-.21-.88-1-1.53-1.94-1.53H5.18c0-.69-.56-1.25-1.25-1.25s-1.25.57-1.25 1.26v17.12a1.25 1.25 0 0 0 2.5 0v-4.02h6.13c.21.87 1 1.53 1.94 1.53h6.07a2 2 0 0 0 2-2V6.96a2 2 0 0 0-2-2M5.18 11.51V8.48h3.03V5.45h3.04v3.03H8.22v3.03h3.03v3.04H8.21v-3.04zm14.14-1.52h-3.03v3.03h3.03v3.04h-3.03v-3.03h-3.03V9.99h3.03V6.96h3.03z"></path></svg></span>Racing</a>
+<a href="g/sports.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M9.534 8.866a6.04 6.04 0 0 1 2.662.736c.286-.44.782-.733 1.347-.733H18.5a2.276 2.276 0 0 1 2.15 3.02l-.001.001-.425 1.225a3.28 3.28 0 0 1-3.094 2.201h-1.784a6.07 6.07 0 0 1-5.743 5.676L9.292 21a6.07 6.07 0 0 1-6.062-5.757l-.008-.312a6.07 6.07 0 0 1 6.07-6.07zm-4.032 6.26a3.794 3.794 0 0 0 3.79 3.598l.195-.005a3.795 3.795 0 0 0 3.594-3.593l.004-.195c0-.914.705-1.89 1.836-1.89h2.21l.158-.012c.36-.057.665-.308.788-.66l.423-1.224h-4.433a1.73 1.73 0 0 1-.888.846c-.484.206-1.15.227-1.708-.166a3.77 3.77 0 0 0-1.878-.677l-.302-.011a3.794 3.794 0 0 0-3.793 3.794zm9.204-11.342a1 1 0 1 1 1.841.782l-.629 1.481a1 1 0 0 1-1.842-.781zm-3.851-.768a1 1 0 0 1 1.161.808l.247 1.375a1 1 0 0 1-1.969.353l-.247-1.375a1 1 0 0 1 .808-1.16M6.743 4.8a1 1 0 0 1 1.387.274l.792 1.183A1 1 0 0 1 7.26 7.37l-.792-1.182A1 1 0 0 1 6.743 4.8"></path></svg></span>Sports</a>
+<a href="g/puzzle.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.629 3.97a1.185 1.185 0 0 0-1.28 1.457 1.25 1.25 0 0 1-1.216 1.54h-3.45v1.918c.321.064.65.178.985.352 1.051.55 1.857 1.597 1.995 2.86v.004a3.683 3.683 0 0 1-2.98 4.017v1.917H7.88a3.7 3.7 0 0 1 .359-.995c.552-1.045 1.598-1.854 2.867-1.986a3.68 3.68 0 0 1 4.01 2.981h2.197v-3.17a1.25 1.25 0 0 1 1.541-1.216 1.18 1.18 0 0 0 1.454-1.289c-.035-.327-.252-.664-.603-.874q-.035-.014-.068-.03a1.08 1.08 0 0 0-.797-.1 1.25 1.25 0 0 1-1.53-1.22v-3.17h-3.45a1.25 1.25 0 0 1-1.217-1.538 1.05 1.05 0 0 0-.1-.787c-.202-.389-.563-.632-.915-.67m8.181 4.918q.405.079.823.272.083.029.162.07c1.048.547 1.862 1.592 2 2.86a3.68 3.68 0 0 1-2.98 4.028v2.167a2.25 2.25 0 0 1-2.25 2.25h-3.701a1.25 1.25 0 0 1-1.216-1.54 1.18 1.18 0 0 0-1.282-1.455c-.346.036-.708.275-.916.669l-.001.002c-.084.158-.12.292-.13.406q-.02.174.03.378a1.25 1.25 0 0 1-1.216 1.54h-3.7a2.25 2.25 0 0 1-2.25-2.25v-3.42a1.25 1.25 0 0 1 1.54-1.216 1.18 1.18 0 0 0 1.454-1.28c-.038-.353-.28-.713-.667-.916h-.001a1.05 1.05 0 0 0-.788-.1 1.25 1.25 0 0 1-1.539-1.216v-3.42a2.25 2.25 0 0 1 2.25-2.25H7.88a3.683 3.683 0 0 1 4.018-2.98h.003c1.264.137 2.311.944 2.86 1.995.175.334.288.663.352.985h2.448a2.25 2.25 0 0 1 2.25 2.25z"></path></svg></span>Puzzle</a>
+<a href="g/platformer.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12.004 3.188a3.25 3.25 0 0 1 1 6.341v.393h3.559a4.25 4.25 0 0 1 4.25 4.25v4.39a2.25 2.25 0 0 1-2.25 2.25H5.438a2.25 2.25 0 0 1-2.25-2.25v-4.39a4.25 4.25 0 0 1 4.25-4.25h3.567v-.393a3.25 3.25 0 0 1 .999-6.341m-4.566 9.234a1.75 1.75 0 0 0-1.75 1.75v1.015c0 .415.335.75.75.75h11.125a.75.75 0 0 0 .75-.75v-1.015a1.75 1.75 0 0 0-1.75-1.75h-3.558v.887a1 1 0 0 1-2 0v-.887zm4.566-7.235a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5" clip-rule="evenodd"></path></svg></span>Platformer</a>
+<a href="g/shooter.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M17.75 12a5.75 5.75 0 1 0-11.5 0 5.75 5.75 0 0 0 11.5 0m2.5 0a8.25 8.25 0 1 1-16.5 0 8.25 8.25 0 0 1 16.5 0"></path><path fill="currentColor" d="M11 3a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm0 14a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm9.996-6a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm-14 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm6.504 1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"></path></svg></span>Shooter</a>
+<a href="g/2player.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M8.03 12.74c.532 0 .963.43.963.962v.482h.482a.963.963 0 0 1 0 1.925h-.482v.482a.963.963 0 0 1-1.926 0v-.482h-.481a.963.963 0 0 1 0-1.925h.481v-.482c0-.531.432-.963.963-.963m4.35 2.889a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m1.926-1.926a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m3.084-5.598a.963.963 0 1 1-.001 1.926.963.963 0 0 1 0-1.926"></path><path fill="currentColor" fill-rule="evenodd" d="M13.538 1.63a1 1 0 0 1 1 1v1.157h1.889a5.824 5.824 0 0 1 2.72 10.972q.019.222.02.45a5.824 5.824 0 0 1-5.823 5.823H7.565a5.823 5.823 0 0 1-2.721-10.971 5.824 5.824 0 0 1 5.805-6.273h1.89V2.63a1 1 0 0 1 1-1M7.565 11.886a3.323 3.323 0 0 0 0 6.646h5.779a3.324 3.324 0 0 0 0-6.646zm3.083-5.599a3.324 3.324 0 0 0-3.315 3.105q.116-.005.232-.006h1.157a.96.96 0 0 1 .948-.801h.481v-.481a.963.963 0 0 1 1.926 0v.481h.482c.477 0 .872.349.948.805a5.82 5.82 0 0 1 4.877 2.905 3.324 3.324 0 0 0-1.957-6.008z" clip-rule="evenodd"></path></svg></span>2 Player</a>
+<a href="g/clicker.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M13.724 10.357c.367.383.782.367 1.214-.032.399-.4.495-.879.095-1.278a3.87 3.87 0 0 0-2.042-1.068v-.287a.999.999 0 0 0-1.997 0v.332c-1.837.441-3.07 1.992-3.07 3.994 0 1.99 1.233 3.55 3.07 3.994v.333a.999.999 0 0 0 1.997 0v-.29a3.9 3.9 0 0 0 2.043-1.081c.43-.415.367-.91-.017-1.31-.415-.4-.878-.4-1.277 0a2.5 2.5 0 0 1-.749.534V9.829l.014.007c.267.125.503.305.718.52m-3.915 1.661c0 .903.451 1.697 1.185 2.095v-4.2c-.734.402-1.185 1.204-1.185 2.106" clip-rule="evenodd"></path></svg></span>Clicker &amp; Idle</a>
+<a href="g/horror.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.297 12.204a5.75 5.75 0 0 1 .857-6.289 5.7 5.7 0 0 0-2.224.565 5.745 5.745 0 0 0-2.689 7.675 5.745 5.745 0 0 0 9.5 1.302 5.75 5.75 0 0 1-5.444-3.253m2.252-1.084a3.244 3.244 0 0 0 4.338 1.52q.334-.162.562-.346a1.25 1.25 0 0 1 2 1.262 8.245 8.245 0 0 1-15.46 1.683A8.245 8.245 0 0 1 8.846 4.228a8.21 8.21 0 0 1 7.11-.018 1.25 1.25 0 0 1-.227 2.34 3.244 3.244 0 0 0-2.18 4.57"></path></svg></span>Horror</a>
+<a href="g/casual.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M9.371 13.527a1 1 0 0 1 1.288.584 1.433 1.433 0 0 0 2.682 0 1 1 0 1 1 1.872.704 3.433 3.433 0 0 1-6.426 0 1 1 0 0 1 .584-1.288" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M9.65 10.471a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0m5.626 0a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0" clip-rule="evenodd"></path></svg></span>Casual</a>
+      </div>
+      <a href="settings.html" class="pz-mobile-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.4-3.5.1-1.2 2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-2-1.2l-.4-2.6H9.3l-.4 2.6c-.7.3-1.4.7-2 1.2l-2.4-1-2 3.4 2 1.6a8 8 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1c.6.5 1.3.9 2 1.2l.4 2.6h5.4l.4-2.6c.7-.3 1.4-.7 2-1.2l2.4 1 2-3.4-2-1.6.1-1.2Z"></path></svg>Settings</a>
+    </div>
+  <div class="pz-exp-cats" id="pzExpCats" aria-label="Categories"><div class="pz-exp-cats-title">Categories</div><div class="pz-mobile-cats">
+<a href="g/action.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M7.307 3.627A1.25 1.25 0 0 1 8.5 2.75H14a1.25 1.25 0 0 1 1.142 1.758L13.924 7.25H17.5a1.25 1.25 0 0 1 1.026 1.964l-8 11.5a1.25 1.25 0 0 1-2.255-.944l1.223-6.52H6a1.25 1.25 0 0 1-1.193-1.623zM9.419 5.25 7.7 10.75H11a1.25 1.25 0 0 1 1.229 1.48l-.426 2.27 3.305-4.75H12a1.25 1.25 0 0 1-1.142-1.758l1.219-2.742z" clip-rule="evenodd"></path></svg></span>Action</a>
+<a href="g/racing.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M19.32 4.96h-6.13c-.21-.88-1-1.53-1.94-1.53H5.18c0-.69-.56-1.25-1.25-1.25s-1.25.57-1.25 1.26v17.12a1.25 1.25 0 0 0 2.5 0v-4.02h6.13c.21.87 1 1.53 1.94 1.53h6.07a2 2 0 0 0 2-2V6.96a2 2 0 0 0-2-2M5.18 11.51V8.48h3.03V5.45h3.04v3.03H8.22v3.03h3.03v3.04H8.21v-3.04zm14.14-1.52h-3.03v3.03h3.03v3.04h-3.03v-3.03h-3.03V9.99h3.03V6.96h3.03z"></path></svg></span>Racing</a>
+<a href="g/sports.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M9.534 8.866a6.04 6.04 0 0 1 2.662.736c.286-.44.782-.733 1.347-.733H18.5a2.276 2.276 0 0 1 2.15 3.02l-.001.001-.425 1.225a3.28 3.28 0 0 1-3.094 2.201h-1.784a6.07 6.07 0 0 1-5.743 5.676L9.292 21a6.07 6.07 0 0 1-6.062-5.757l-.008-.312a6.07 6.07 0 0 1 6.07-6.07zm-4.032 6.26a3.794 3.794 0 0 0 3.79 3.598l.195-.005a3.795 3.795 0 0 0 3.594-3.593l.004-.195c0-.914.705-1.89 1.836-1.89h2.21l.158-.012c.36-.057.665-.308.788-.66l.423-1.224h-4.433a1.73 1.73 0 0 1-.888.846c-.484.206-1.15.227-1.708-.166a3.77 3.77 0 0 0-1.878-.677l-.302-.011a3.794 3.794 0 0 0-3.793 3.794zm9.204-11.342a1 1 0 1 1 1.841.782l-.629 1.481a1 1 0 0 1-1.842-.781zm-3.851-.768a1 1 0 0 1 1.161.808l.247 1.375a1 1 0 0 1-1.969.353l-.247-1.375a1 1 0 0 1 .808-1.16M6.743 4.8a1 1 0 0 1 1.387.274l.792 1.183A1 1 0 0 1 7.26 7.37l-.792-1.182A1 1 0 0 1 6.743 4.8"></path></svg></span>Sports</a>
+<a href="g/puzzle.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.629 3.97a1.185 1.185 0 0 0-1.28 1.457 1.25 1.25 0 0 1-1.216 1.54h-3.45v1.918c.321.064.65.178.985.352 1.051.55 1.857 1.597 1.995 2.86v.004a3.683 3.683 0 0 1-2.98 4.017v1.917H7.88a3.7 3.7 0 0 1 .359-.995c.552-1.045 1.598-1.854 2.867-1.986a3.68 3.68 0 0 1 4.01 2.981h2.197v-3.17a1.25 1.25 0 0 1 1.541-1.216 1.18 1.18 0 0 0 1.454-1.289c-.035-.327-.252-.664-.603-.874q-.035-.014-.068-.03a1.08 1.08 0 0 0-.797-.1 1.25 1.25 0 0 1-1.53-1.22v-3.17h-3.45a1.25 1.25 0 0 1-1.217-1.538 1.05 1.05 0 0 0-.1-.787c-.202-.389-.563-.632-.915-.67m8.181 4.918q.405.079.823.272.083.029.162.07c1.048.547 1.862 1.592 2 2.86a3.68 3.68 0 0 1-2.98 4.028v2.167a2.25 2.25 0 0 1-2.25 2.25h-3.701a1.25 1.25 0 0 1-1.216-1.54 1.18 1.18 0 0 0-1.282-1.455c-.346.036-.708.275-.916.669l-.001.002c-.084.158-.12.292-.13.406q-.02.174.03.378a1.25 1.25 0 0 1-1.216 1.54h-3.7a2.25 2.25 0 0 1-2.25-2.25v-3.42a1.25 1.25 0 0 1 1.54-1.216 1.18 1.18 0 0 0 1.454-1.28c-.038-.353-.28-.713-.667-.916h-.001a1.05 1.05 0 0 0-.788-.1 1.25 1.25 0 0 1-1.539-1.216v-3.42a2.25 2.25 0 0 1 2.25-2.25H7.88a3.683 3.683 0 0 1 4.018-2.98h.003c1.264.137 2.311.944 2.86 1.995.175.334.288.663.352.985h2.448a2.25 2.25 0 0 1 2.25 2.25z"></path></svg></span>Puzzle</a>
+<a href="g/platformer.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12.004 3.188a3.25 3.25 0 0 1 1 6.341v.393h3.559a4.25 4.25 0 0 1 4.25 4.25v4.39a2.25 2.25 0 0 1-2.25 2.25H5.438a2.25 2.25 0 0 1-2.25-2.25v-4.39a4.25 4.25 0 0 1 4.25-4.25h3.567v-.393a3.25 3.25 0 0 1 .999-6.341m-4.566 9.234a1.75 1.75 0 0 0-1.75 1.75v1.015c0 .415.335.75.75.75h11.125a.75.75 0 0 0 .75-.75v-1.015a1.75 1.75 0 0 0-1.75-1.75h-3.558v.887a1 1 0 0 1-2 0v-.887zm4.566-7.235a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5" clip-rule="evenodd"></path></svg></span>Platformer</a>
+<a href="g/shooter.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M17.75 12a5.75 5.75 0 1 0-11.5 0 5.75 5.75 0 0 0 11.5 0m2.5 0a8.25 8.25 0 1 1-16.5 0 8.25 8.25 0 0 1 16.5 0"></path><path fill="currentColor" d="M11 3a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm0 14a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm9.996-6a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm-14 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm6.504 1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"></path></svg></span>Shooter</a>
+<a href="g/2player.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M8.03 12.74c.532 0 .963.43.963.962v.482h.482a.963.963 0 0 1 0 1.925h-.482v.482a.963.963 0 0 1-1.926 0v-.482h-.481a.963.963 0 0 1 0-1.925h.481v-.482c0-.531.432-.963.963-.963m4.35 2.889a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m1.926-1.926a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m3.084-5.598a.963.963 0 1 1-.001 1.926.963.963 0 0 1 0-1.926"></path><path fill="currentColor" fill-rule="evenodd" d="M13.538 1.63a1 1 0 0 1 1 1v1.157h1.889a5.824 5.824 0 0 1 2.72 10.972q.019.222.02.45a5.824 5.824 0 0 1-5.823 5.823H7.565a5.823 5.823 0 0 1-2.721-10.971 5.824 5.824 0 0 1 5.805-6.273h1.89V2.63a1 1 0 0 1 1-1M7.565 11.886a3.323 3.323 0 0 0 0 6.646h5.779a3.324 3.324 0 0 0 0-6.646zm3.083-5.599a3.324 3.324 0 0 0-3.315 3.105q.116-.005.232-.006h1.157a.96.96 0 0 1 .948-.801h.481v-.481a.963.963 0 0 1 1.926 0v.481h.482c.477 0 .872.349.948.805a5.82 5.82 0 0 1 4.877 2.905 3.324 3.324 0 0 0-1.957-6.008z" clip-rule="evenodd"></path></svg></span>2 Player</a>
+<a href="g/clicker.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M13.724 10.357c.367.383.782.367 1.214-.032.399-.4.495-.879.095-1.278a3.87 3.87 0 0 0-2.042-1.068v-.287a.999.999 0 0 0-1.997 0v.332c-1.837.441-3.07 1.992-3.07 3.994 0 1.99 1.233 3.55 3.07 3.994v.333a.999.999 0 0 0 1.997 0v-.29a3.9 3.9 0 0 0 2.043-1.081c.43-.415.367-.91-.017-1.31-.415-.4-.878-.4-1.277 0a2.5 2.5 0 0 1-.749.534V9.829l.014.007c.267.125.503.305.718.52m-3.915 1.661c0 .903.451 1.697 1.185 2.095v-4.2c-.734.402-1.185 1.204-1.185 2.106" clip-rule="evenodd"></path></svg></span>Clicker &amp; Idle</a>
+<a href="g/horror.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" d="M11.297 12.204a5.75 5.75 0 0 1 .857-6.289 5.7 5.7 0 0 0-2.224.565 5.745 5.745 0 0 0-2.689 7.675 5.745 5.745 0 0 0 9.5 1.302 5.75 5.75 0 0 1-5.444-3.253m2.252-1.084a3.244 3.244 0 0 0 4.338 1.52q.334-.162.562-.346a1.25 1.25 0 0 1 2 1.262 8.245 8.245 0 0 1-15.46 1.683A8.245 8.245 0 0 1 8.846 4.228a8.21 8.21 0 0 1 7.11-.018 1.25 1.25 0 0 1-.227 2.34 3.244 3.244 0 0 0-2.18 4.57"></path></svg></span>Horror</a>
+<a href="g/casual.html" class="pz-mobile-cat"><span class="pz-cat-badge"><svg class="pz-cat-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none"><path fill="currentColor" fill-rule="evenodd" d="M9.371 13.527a1 1 0 0 1 1.288.584 1.433 1.433 0 0 0 2.682 0 1 1 0 1 1 1.872.704 3.433 3.433 0 0 1-6.426 0 1 1 0 0 1 .584-1.288" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M9.65 10.471a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0m5.626 0a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0" clip-rule="evenodd"></path></svg></span>Casual</a>
+      </div><a class="pz-exp-cats-all" href="g.html">All games</a></div></header>
+
+  <main class="template-spacer pz-results" id="main" aria-label="Search results">
+    <div class="pz-results-inner">
+      <p class="pz-results-kicker">Search results</p>
+      <h1 class="pz-results-title" id="pzResultsTitle">Search</h1>
+      <p class="pz-results-meta" id="pzResultsMeta">Type a game name in the search box above.</p>
+      <div class="pz-results-cats" id="pzResultsCats"></div>
+      <div id="search-results"></div>
+      <div class="pz-results-empty" id="pzResultsEmpty" hidden="">
+        <p>No games match that. Try a shorter word, or browse everything.</p>
+        <a href="g.html" class="pz-btn">Browse all games</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <a class="foot-brand" href="index.html"><img src="images/speghettilogo.png" alt="" width="480" height="401"><span class="pk-word">The <b>Speghetti</b> Edition</span></a>
+      <p class="foot-tag">Hot picks, fast loading, zero hassle. Jump in instantly.</p>
+    </div>
+    <div class="foot-cols">
+      <div><h3>Popular</h3><ul>
+        <li><a href="g/racing.html">Racing games</a></li><li><a href="g/2player.html">2 player games</a></li><li><a href="g/sports.html">Sports games</a></li><li><a href="g/action.html">Action games</a></li><li><a href="g/puzzle.html">Puzzle games</a></li><li><a href="g.html">All 278+ games</a></li>
+      </ul></div>
+      <div><h3>Help and support</h3><ul>
+        <li><a href="mailto:thesynacofficial@gmail.com">Contact</a></li><li><a href="privacy.html">Privacy Policy</a></li><li><a href="dmca.html">Copyright Policy</a></li><li><a href="tos.html">Terms of Service</a></li>
+      </ul></div>
+      <div><h3>Get to know us</h3><ul>
+        <li><a href="about.html">About</a></li><li><a href="settings.html">Settings</a></li><li><button type="button" data-random="">Random game</button></li>
+      </ul></div>
+    </div>
+    <div class="foot-bottom">© 2026 The Speghetti Edition. All rights reserved.</div>
+  </footer>
+
+
+  <script>
+    (function () {
+      const storageKey = "recentlyPlayedPerLocale";
+      const container = document.querySelector('[data-recently-played-target="container"]');
+      if (!container) return;
+      const locale =
+        document.documentElement.lang ||
+        document.body?.getAttribute("lang") ||
+        "en";
+
+      let stored = {};
+      try {
+        stored = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      } catch (err) {
+        stored = {};
+      }
+
+      const games = Array.isArray(stored[locale])
+        ? stored[locale]
+        : Array.isArray(stored.en)
+          ? stored.en
+          : [];
+
+      if (!games.length) {
+        return;
+      }
+
+      container.innerHTML = "";
+      games.slice(0, 12).forEach((game) => {
+        if (!game || !game.url || !game.image || !game.name) return;
+
+        const link = document.createElement("a");
+        link.href = game.url.replace(/^\/+/, "").replace(/\.html$/, "") + ".html";
+        link.className = "continue-playing-item";
+        link.tabIndex = 0;
+
+        const img = document.createElement("img");
+        img.src = game.image.replace(/^\/+/, "");
+        img.alt = game.name;
+        img.loading = "lazy";
+        img.width = 160;
+        img.height = 90;
+
+        link.appendChild(img);
+        container.appendChild(link);
+      });
+
+      if (!container.children.length) return;
+    })();
+  </script>
+  <script>
+    (function () {
+      const slider = document.getElementById("gameSlider");
+      if (!slider) return;
+      const track = slider.querySelector(".game-slider-track");
+      const viewport = slider.querySelector(".game-slider-viewport");
+      const prev = slider.querySelector(".game-slider-prev");
+      const next = slider.querySelector(".game-slider-next");
+      const slides = Array.from(track.querySelectorAll(".game-slide"));
+      let offset = 0;
+      let timer = null;
+      let hovered = false;
+      let dragging = false;
+      let dragStartX = 0;
+      let dragStartOffset = 0;
+      let dragMoved = 0;
+
+      const step = () => {
+        const first = slides[0];
+        if (!first) return 0;
+        const style = window.getComputedStyle(first);
+        return first.getBoundingClientRect().width + parseFloat(style.marginRight || 0) + 12;
+      };
+
+      const maxOffset = () => Math.max(0, track.scrollWidth - viewport.clientWidth);
+
+      const update = (animate) => {
+        track.style.transition = animate ? "transform 0.3s ease-in-out" : "none";
+        track.style.transform = "translateX(-" + offset + "px)";
+        prev.style.display = offset > 0 ? "block" : "none";
+        next.style.display = offset < maxOffset() - 1 ? "block" : "none";
+      };
+
+      const startAuto = () => {
+        if (timer) return;
+        timer = window.setInterval(() => {
+          if (hovered || dragging || document.hidden) return;
+          const s = step();
+          if (!s) return;
+          if (offset + s < maxOffset() + 1) offset += s;
+          else offset = 0;
+          update(true);
+        }, 5000);
+      };
+
+      const stopAuto = () => {
+        if (!timer) return;
+        window.clearInterval(timer);
+        timer = null;
+      };
+
+      prev.addEventListener("click", () => {
+        offset = Math.max(0, offset - step());
+        update(true);
+      });
+
+      next.addEventListener("click", () => {
+        offset = Math.min(maxOffset(), offset + step());
+        update(true);
+      });
+
+      slider.addEventListener("mouseenter", () => {
+        hovered = true;
+        stopAuto();
+      });
+
+      slider.addEventListener("mouseleave", () => {
+        hovered = false;
+        if (!dragging) startAuto();
+      });
+
+      track.addEventListener("pointerdown", (e) => {
+        dragging = true;
+        dragStartX = e.clientX;
+        dragStartOffset = offset;
+        dragMoved = 0;
+        track.style.cursor = "grabbing";
+        stopAuto();
+      });
+
+      window.addEventListener("pointermove", (e) => {
+        if (!dragging) return;
+        const delta = e.clientX - dragStartX;
+        dragMoved = delta;
+        offset = Math.min(maxOffset(), Math.max(0, dragStartOffset - delta));
+        update(false);
+      });
+
+      const endDrag = () => {
+        if (!dragging) return;
+        dragging = false;
+        track.style.cursor = "";
+        const threshold = Math.max(50, step() * 0.2);
+        if (Math.abs(dragMoved) > threshold) {
+          if (dragMoved < 0) offset = Math.min(maxOffset(), offset + step());
+          else offset = Math.max(0, offset - step());
+        }
+        update(true);
+        if (!hovered) startAuto();
+      };
+
+      window.addEventListener("pointerup", endDrag);
+      window.addEventListener("pointercancel", endDrag);
+      window.addEventListener("resize", () => {
+        offset = Math.min(offset, maxOffset());
+        update(false);
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stopAuto();
+        else if (!hovered && !dragging) startAuto();
+      });
+
+      update(false);
+      startAuto();
+    })();
+  </script><script src="jsload/searchicons%EF%B9%96v=41.js"></script>
+<script>window.PZ_CAT_ICONS={"action":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M7.307 3.627A1.25 1.25 0 0 1 8.5 2.75H14a1.25 1.25 0 0 1 1.142 1.758L13.924 7.25H17.5a1.25 1.25 0 0 1 1.026 1.964l-8 11.5a1.25 1.25 0 0 1-2.255-.944l1.223-6.52H6a1.25 1.25 0 0 1-1.193-1.623zM9.419 5.25 7.7 10.75H11a1.25 1.25 0 0 1 1.229 1.48l-.426 2.27 3.305-4.75H12a1.25 1.25 0 0 1-1.142-1.758l1.219-2.742z\" clip-rule=\"evenodd\"/></svg>","racing":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M19.32 4.96h-6.13c-.21-.88-1-1.53-1.94-1.53H5.18c0-.69-.56-1.25-1.25-1.25s-1.25.57-1.25 1.26v17.12a1.25 1.25 0 0 0 2.5 0v-4.02h6.13c.21.87 1 1.53 1.94 1.53h6.07a2 2 0 0 0 2-2V6.96a2 2 0 0 0-2-2M5.18 11.51V8.48h3.03V5.45h3.04v3.03H8.22v3.03h3.03v3.04H8.21v-3.04zm14.14-1.52h-3.03v3.03h3.03v3.04h-3.03v-3.03h-3.03V9.99h3.03V6.96h3.03z\"/></svg>","sports":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M9.534 8.866a6.04 6.04 0 0 1 2.662.736c.286-.44.782-.733 1.347-.733H18.5a2.276 2.276 0 0 1 2.15 3.02l-.001.001-.425 1.225a3.28 3.28 0 0 1-3.094 2.201h-1.784a6.07 6.07 0 0 1-5.743 5.676L9.292 21a6.07 6.07 0 0 1-6.062-5.757l-.008-.312a6.07 6.07 0 0 1 6.07-6.07zm-4.032 6.26a3.794 3.794 0 0 0 3.79 3.598l.195-.005a3.795 3.795 0 0 0 3.594-3.593l.004-.195c0-.914.705-1.89 1.836-1.89h2.21l.158-.012c.36-.057.665-.308.788-.66l.423-1.224h-4.433a1.73 1.73 0 0 1-.888.846c-.484.206-1.15.227-1.708-.166a3.77 3.77 0 0 0-1.878-.677l-.302-.011a3.794 3.794 0 0 0-3.793 3.794zm9.204-11.342a1 1 0 1 1 1.841.782l-.629 1.481a1 1 0 0 1-1.842-.781zm-3.851-.768a1 1 0 0 1 1.161.808l.247 1.375a1 1 0 0 1-1.969.353l-.247-1.375a1 1 0 0 1 .808-1.16M6.743 4.8a1 1 0 0 1 1.387.274l.792 1.183A1 1 0 0 1 7.26 7.37l-.792-1.182A1 1 0 0 1 6.743 4.8\"/></svg>","puzzle":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M11.629 3.97a1.185 1.185 0 0 0-1.28 1.457 1.25 1.25 0 0 1-1.216 1.54h-3.45v1.918c.321.064.65.178.985.352 1.051.55 1.857 1.597 1.995 2.86v.004a3.683 3.683 0 0 1-2.98 4.017v1.917H7.88a3.7 3.7 0 0 1 .359-.995c.552-1.045 1.598-1.854 2.867-1.986a3.68 3.68 0 0 1 4.01 2.981h2.197v-3.17a1.25 1.25 0 0 1 1.541-1.216 1.18 1.18 0 0 0 1.454-1.289c-.035-.327-.252-.664-.603-.874q-.035-.014-.068-.03a1.08 1.08 0 0 0-.797-.1 1.25 1.25 0 0 1-1.53-1.22v-3.17h-3.45a1.25 1.25 0 0 1-1.217-1.538 1.05 1.05 0 0 0-.1-.787c-.202-.389-.563-.632-.915-.67m8.181 4.918q.405.079.823.272.083.029.162.07c1.048.547 1.862 1.592 2 2.86a3.68 3.68 0 0 1-2.98 4.028v2.167a2.25 2.25 0 0 1-2.25 2.25h-3.701a1.25 1.25 0 0 1-1.216-1.54 1.18 1.18 0 0 0-1.282-1.455c-.346.036-.708.275-.916.669l-.001.002c-.084.158-.12.292-.13.406q-.02.174.03.378a1.25 1.25 0 0 1-1.216 1.54h-3.7a2.25 2.25 0 0 1-2.25-2.25v-3.42a1.25 1.25 0 0 1 1.54-1.216 1.18 1.18 0 0 0 1.454-1.28c-.038-.353-.28-.713-.667-.916h-.001a1.05 1.05 0 0 0-.788-.1 1.25 1.25 0 0 1-1.539-1.216v-3.42a2.25 2.25 0 0 1 2.25-2.25H7.88a3.683 3.683 0 0 1 4.018-2.98h.003c1.264.137 2.311.944 2.86 1.995.175.334.288.663.352.985h2.448a2.25 2.25 0 0 1 2.25 2.25z\"/></svg>","platformer":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12.004 3.188a3.25 3.25 0 0 1 1 6.341v.393h3.559a4.25 4.25 0 0 1 4.25 4.25v4.39a2.25 2.25 0 0 1-2.25 2.25H5.438a2.25 2.25 0 0 1-2.25-2.25v-4.39a4.25 4.25 0 0 1 4.25-4.25h3.567v-.393a3.25 3.25 0 0 1 .999-6.341m-4.566 9.234a1.75 1.75 0 0 0-1.75 1.75v1.015c0 .415.335.75.75.75h11.125a.75.75 0 0 0 .75-.75v-1.015a1.75 1.75 0 0 0-1.75-1.75h-3.558v.887a1 1 0 0 1-2 0v-.887zm4.566-7.235a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5\" clip-rule=\"evenodd\"/></svg>","shooter":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M17.75 12a5.75 5.75 0 1 0-11.5 0 5.75 5.75 0 0 0 11.5 0m2.5 0a8.25 8.25 0 1 1-16.5 0 8.25 8.25 0 0 1 16.5 0\"/><path fill=\"currentColor\" d=\"M11 3a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm0 14a1 1 0 1 1 2 0v4a1 1 0 1 1-2 0zm9.996-6a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm-14 0a1 1 0 1 1 0 2h-4a1 1 0 1 1 0-2zm6.504 1a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0\"/></svg>","2player":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M8.03 12.74c.532 0 .963.43.963.962v.482h.482a.963.963 0 0 1 0 1.925h-.482v.482a.963.963 0 0 1-1.926 0v-.482h-.481a.963.963 0 0 1 0-1.925h.481v-.482c0-.531.432-.963.963-.963m4.35 2.889a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m1.926-1.926a.963.963 0 1 1 0 1.926.963.963 0 0 1 0-1.926m3.084-5.598a.963.963 0 1 1-.001 1.926.963.963 0 0 1 0-1.926\"/><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M13.538 1.63a1 1 0 0 1 1 1v1.157h1.889a5.824 5.824 0 0 1 2.72 10.972q.019.222.02.45a5.824 5.824 0 0 1-5.823 5.823H7.565a5.823 5.823 0 0 1-2.721-10.971 5.824 5.824 0 0 1 5.805-6.273h1.89V2.63a1 1 0 0 1 1-1M7.565 11.886a3.323 3.323 0 0 0 0 6.646h5.779a3.324 3.324 0 0 0 0-6.646zm3.083-5.599a3.324 3.324 0 0 0-3.315 3.105q.116-.005.232-.006h1.157a.96.96 0 0 1 .948-.801h.481v-.481a.963.963 0 0 1 1.926 0v.481h.482c.477 0 .872.349.948.805a5.82 5.82 0 0 1 4.877 2.905 3.324 3.324 0 0 0-1.957-6.008z\" clip-rule=\"evenodd\"/></svg>","clicker":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18\" clip-rule=\"evenodd\"/><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M13.724 10.357c.367.383.782.367 1.214-.032.399-.4.495-.879.095-1.278a3.87 3.87 0 0 0-2.042-1.068v-.287a.999.999 0 0 0-1.997 0v.332c-1.837.441-3.07 1.992-3.07 3.994 0 1.99 1.233 3.55 3.07 3.994v.333a.999.999 0 0 0 1.997 0v-.29a3.9 3.9 0 0 0 2.043-1.081c.43-.415.367-.91-.017-1.31-.415-.4-.878-.4-1.277 0a2.5 2.5 0 0 1-.749.534V9.829l.014.007c.267.125.503.305.718.52m-3.915 1.661c0 .903.451 1.697 1.185 2.095v-4.2c-.734.402-1.185 1.204-1.185 2.106\" clip-rule=\"evenodd\"/></svg>","horror":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" d=\"M11.297 12.204a5.75 5.75 0 0 1 .857-6.289 5.7 5.7 0 0 0-2.224.565 5.745 5.745 0 0 0-2.689 7.675 5.745 5.745 0 0 0 9.5 1.302 5.75 5.75 0 0 1-5.444-3.253m2.252-1.084a3.244 3.244 0 0 0 4.338 1.52q.334-.162.562-.346a1.25 1.25 0 0 1 2 1.262 8.245 8.245 0 0 1-15.46 1.683A8.245 8.245 0 0 1 8.846 4.228a8.21 8.21 0 0 1 7.11-.018 1.25 1.25 0 0 1-.227 2.34 3.244 3.244 0 0 0-2.18 4.57\"/></svg>","casual":"<svg class=\"pz-cat-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\"><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M9.371 13.527a1 1 0 0 1 1.288.584 1.433 1.433 0 0 0 2.682 0 1 1 0 1 1 1.872.704 3.433 3.433 0 0 1-6.426 0 1 1 0 0 1 .584-1.288\" clip-rule=\"evenodd\"/><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13m0 2.5a9 9 0 1 0 0-18 9 9 0 0 0 0 18\" clip-rule=\"evenodd\"/><path fill=\"currentColor\" fill-rule=\"evenodd\" d=\"M9.65 10.471a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0m5.626 0a.471.471 0 1 0-.942 0 1 1 0 0 1-2 0 2.471 2.471 0 1 1 4.942 0 1 1 0 0 1-2 0\" clip-rule=\"evenodd\"/></svg>"};</script>
+<script src="jsload/searchlogic2%EF%B9%96v=5.js"></script>
+
+<script src="jsload/backtotop%EF%B9%96v=2.js" defer=""></script>
+<script>
+(function () {
+  var nav = document.getElementById("pzNav"); if (!nav) return;
+  var menu = document.getElementById("pzCats"), btn = menu.querySelector(".pz-menu-btn");
+  function setMenu(open) { menu.classList.toggle("open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+  btn.addEventListener("click", function () { setMenu(!menu.classList.contains("open")); });
+  var hoverT; menu.addEventListener("mouseenter", function () { if (window.matchMedia("(hover: hover)").matches) { clearTimeout(hoverT); setMenu(true); } });
+  menu.addEventListener("mouseleave", function () { if (window.matchMedia("(hover: hover)").matches) hoverT = setTimeout(function () { setMenu(false); }, 160); });
+  document.addEventListener("click", function (e) { if (!menu.contains(e.target)) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { setMenu(false); mobile.hidden = true; burger.setAttribute("aria-expanded", "false"); } });
+  var burger = document.getElementById("pzBurger"), mobile = document.getElementById("pzMobile");
+  burger.addEventListener("click", function () { var open = mobile.hidden; mobile.hidden = !open; burger.setAttribute("aria-expanded", open ? "true" : "false"); });
+  document.querySelectorAll("[data-random]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      var list = Array.isArray(window.SEARCH_GAMES) ? window.SEARCH_GAMES : [];
+      if (!list.length) { location.href = location.pathname.includes("/g/") ? "../g.html" : "g.html"; return; }
+      var here = location.pathname.replace(/\/$/, ""), pick;
+      do { pick = list[Math.floor(Math.random() * list.length)]; } while (list.length > 1 && pick.url === here);
+      location.href = (location.pathname.includes("/g/") ? "../g/" : "g/") + pick.url.split("/").pop() + ".html";
+    });
+  });
+})();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var q = (new URLSearchParams(location.search).get("q") || "").trim();
+  var title = document.getElementById("pzResultsTitle"), meta = document.getElementById("pzResultsMeta");
+  var grid = document.getElementById("search-results"), cats = document.getElementById("pzResultsCats"), empty = document.getElementById("pzResultsEmpty");
+  var esc = function (t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); };
+  var input = document.querySelector("#navbarSearch input"); if (input && q) input.value = q;
+  if (!q) { title.textContent = "Search"; meta.textContent = "Type a game name in the search box above."; return; }
+  document.title = "Search: " + q + " - The Speghetti Edition";
+  title.innerHTML = "Results for &ldquo;<b>" + esc(q) + "</b>&rdquo;";
+  var games = window.pzRankGames ? window.pzRankGames(q) : [];
+  var matchedCats = window.pzMatchCategories ? window.pzMatchCategories(q) : [];
+  var icons = window.PZ_CAT_ICONS || {};
+  cats.innerHTML = matchedCats.map(function (c) { return '<a href="g/' + esc(c.slug) + '.html">' + (icons[c.slug] || "") + esc(c.name) + '<span>' + c.count + ' games</span></a>'; }).join("");
+  meta.textContent = games.length ? games.length + (games.length === 1 ? " game" : " games") + " found" : "";
+  if (!games.length) { empty.hidden = false; return; }
+  // Same image handling as /g/index.html: derive the AVIF from the listed PNG,
+  // try AVIF first, then the PNG, then the original path.
+  function getPreferredImagePaths(originalPath) {
+    // A "?v=N" suffix is a cache-buster; carry it over to the derived paths.
+    var parts = String(originalPath || "").split("?");
+    var suffix = parts[1] ? "?" + parts[1] : "";
+    var fileName = parts[0].split("/").pop() || "";
+    var baseName = fileName.replace(/\.[^/.]+$/, "");
+    return { avif: "avifgames/" + baseName + ".avif" + suffix, png: "apnggames/" + baseName + ".png" + suffix, base: baseName };
+  }
+  // Tile-sized renditions (html/tiles/<target>/<base>.{avif,webp}, tools/build-tile-renditions.py)
+  // instead of the full-size art above -- same TILE_TARGETS/TILE_SIZES as /g/index.html and
+  // tools/generate-categories.js's GRID_SIZES: #search-results is byte-for-byte the same
+  // `auto-fill, minmax(X, 1fr)` grid (html/style/searchpage.css) on all three surfaces.
+  var TILE_TARGETS = [94, 204, 256, 314, 512];
+  var TILE_SIZES = "(max-width: 760px) 34vw, (max-width: 860px) 27vw, (max-width: 1100px) 24vw, 264px";
+  grid.innerHTML = "";
+  games.forEach(function (g) {
+    var preferred = getPreferredImagePaths(g.image);
+    var candidates = [preferred.avif, preferred.png, g.image];
+    var candidateIndex = 0;
+    var gameElement = document.createElement("div"); gameElement.className = "game";
+    var linkElement = document.createElement("a"); linkElement.href = g.url.replace(/^\/+/, "").replace(/\.html$/, "") + ".html";
+    // AVIF/WebP <source>s carry the fast path; the <img> is only reached when neither format
+    // decodes or a chosen rendition 404s (a game added since the last renditions build) -- same
+    // "strip sources, fall back to the existing avif->png->original chain" pattern as the
+    // homepage's recently-played tiles (tools/poki-home-layout-navbar-test.js).
+    var pictureElement = document.createElement("picture");
+    [["image/avif", "avif"], ["image/webp", "webp"]].forEach(function (f) {
+      var sourceElement = document.createElement("source");
+      sourceElement.type = f[0];
+      sourceElement.srcset = TILE_TARGETS.map(function (t) { return "tiles/" + t + "/" + preferred.base + "." + f[1] + " " + t + "w"; }).join(", ");
+      sourceElement.sizes = TILE_SIZES;
+      pictureElement.appendChild(sourceElement);
+    });
+    var imageElement = document.createElement("img");
+    imageElement.src = candidates[candidateIndex]; imageElement.alt = g.name; imageElement.loading = "lazy";
+    var sourcesStripped = false;
+    imageElement.onerror = function () {
+      if (!sourcesStripped) {
+        while (pictureElement.firstChild && pictureElement.firstChild !== imageElement) { pictureElement.removeChild(pictureElement.firstChild); }
+        sourcesStripped = true;
+      }
+      candidateIndex += 1;
+      if (candidateIndex < candidates.length) { imageElement.src = candidates[candidateIndex]; return; }
+      imageElement.onerror = null;
+    };
+    pictureElement.appendChild(imageElement);
+    var overlayElement = document.createElement("div"); overlayElement.className = "overlay"; overlayElement.textContent = g.name;
+    linkElement.appendChild(pictureElement); linkElement.appendChild(overlayElement);
+    gameElement.appendChild(linkElement); grid.appendChild(gameElement);
+  });
+});
+</script>
+<script defer="" src="jsload/hoverpreview%EF%B9%96v=24.js"></script>
+<script type="module" src="static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495.js" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;e4fe5c4a5ec14623bb7dd4affab57660&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}"></script>
+
+
+<button id="backToTop" class="back-to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></button></body></html>
