@@ -1,0 +1,508 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="robots" content="noindex, follow">
+    <title>Awesome Tanks 2</title>
+
+    <style>
+        @font-face {
+            font-family: "Bebas Neue";
+            src: url("../css/BebasNeue-Regular.woff2") format("woff2");
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #002B50;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+        }
+
+        #gameframe {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            position: relative;
+        }
+
+        /* Fullscreen loader */
+        #loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #202f4e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        /* Dot container */
+        #loader .inline-flex {
+            display: flex;
+            gap: 6px;
+        }
+
+        /* Square dots */
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 2px;
+            animation: dotPulse 1.2s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.15s; }
+        .dot:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-4px);
+            }
+        }
+
+        .fullscreen-game-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 64px;
+            background: rgb(30, 30, 30);
+            border-top: 0;
+            display: none;
+            grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+            align-items: center;
+            column-gap: 10px;
+            padding-right: 10px;
+            padding-left: 12px;
+            box-sizing: border-box;
+            z-index: 99999;
+            align-self: stretch;
+            flex-grow: 0;
+            flex-shrink: 0;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            font-family: Arial, sans-serif;
+            color: rgb(255, 255, 255);
+        }
+
+        .fullscreen-game-bar-left {
+            grid-column: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .fullscreen-game-bar-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex: 0 0 auto;
+        }
+
+        .fullscreen-game-bar-title {
+            color: rgb(255, 255, 255);
+            font-size: 1.49rem;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        #minimize-btn {
+            grid-column: 3;
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            flex: 0 0 auto;
+            justify-self: end;
+            border: 0;
+            background: rgba(255, 255, 255, 0.12);
+            color: rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #minimize-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+        }
+
+        #minimize-btn:active {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        #minimize-btn .minimize-icon {
+            width: 22px;
+            height: 22px;
+            display: block;
+        }
+
+        #hide-bar-btn {
+            grid-column: 2;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: 40px;
+            padding: 0 16px 0 12px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 9999px;
+            background: transparent;
+            color: rgb(255, 255, 255);
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+            line-height: 1;
+            white-space: nowrap;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #hide-bar-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #hide-bar-btn:active {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        #hide-bar-btn .hide-bar-icon {
+            width: 22px;
+            height: 22px;
+            flex: 0 0 auto;
+        }
+
+        /* Under 380px the label would push a long title into an ellipsis, so
+           narrow phones keep the icon and the aria-label only. */
+        @media (max-width: 379px) {
+            #hide-bar-btn .hide-bar-label {
+                display: none;
+            }
+            #hide-bar-btn {
+                padding: 0;
+                width: 40px;
+                justify-content: center;
+            }
+        }
+
+        body.is-game-fullscreen {
+            padding-bottom: 64px;
+        }
+
+        body.is-game-fullscreen .fullscreen-game-bar {
+            display: grid;
+        }
+
+        /* "Hide this bar" tucks the bar away until fullscreen is re-entered. */
+        body.is-game-fullscreen.is-bar-hidden {
+            padding-bottom: 0;
+        }
+
+        body.is-game-fullscreen.is-bar-hidden .fullscreen-game-bar {
+            display: none;
+        }
+
+        /* Phones (forced pseudo-fullscreen) rely on the bar as their only exit,
+           so they never get the option to hide it. */
+        body.is-forced-fullscreen #hide-bar-btn {
+            display: none;
+        }
+
+        body.is-game-fullscreen #gameframe {
+            height: 100%;
+            min-height: 0;
+        }
+
+        /* Sideways on a phone there is no room to spend 64px on a bar, so the
+           minimize control shrinks to a tab on the left edge. Scoped to the
+           forced (iPhone pseudo-) fullscreen so a wide desktop keeps its bar. */
+        .landscape-minimize {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            display: none;
+            align-items: center;
+            gap: 6px;
+            height: 40px;
+            padding: 0 12px 0 8px;
+            border: 0;
+            border-radius: 0 9999px 9999px 0;
+            background: rgba(30, 30, 30, 0.92);
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            z-index: 99999;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .landscape-minimize:active {
+            background: rgba(15, 15, 15, 0.95);
+        }
+
+        .landscape-minimize-logo {
+            width: 26px;
+            height: 26px;
+            border-radius: 6px;
+            object-fit: contain;
+            flex: 0 0 auto;
+        }
+
+        .landscape-minimize-chevron {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+        }
+
+        @media (orientation: landscape) {
+            body.is-forced-fullscreen.is-game-fullscreen {
+                padding-bottom: 0;
+            }
+
+            body.is-forced-fullscreen.is-game-fullscreen .fullscreen-game-bar {
+                display: none;
+            }
+
+            body.is-forced-fullscreen.is-game-fullscreen .landscape-minimize {
+                display: flex;
+            }
+        }
+    </style>
+
+<style>.back-to-top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:0;background:#f0d210;color:#171717;cursor:pointer;z-index:900;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,transform .25s cubic-bezier(.2,.9,.3,1.2),background-color .2s ease;box-shadow:0 8px 24px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;}.back-to-top.show{opacity:1;pointer-events:auto;transform:translateY(0);}.back-to-top:hover{background:#fc5849;color:#fff;}.back-to-top svg{width:22px;height:22px;display:block;}@media (max-width:500px){.back-to-top{right:14px;bottom:14px;width:42px;height:42px;}}</style></head>
+<body>
+    
+
+    <iframe id="gameframe" src="https://games.pizzaedition.com/AwesomeTanks2/g/index.html" allow="autoplay; fullscreen; camera; focus-without-user-activation *; monetization; gamepad; keyboard-map *; xr-spatial-tracking; clipboard-write; web-share; accelerometer; magnetometer; gyroscope; microphone *" scrolling="no">
+    </iframe>
+
+    <button type="button" id="landscape-minimize-btn" class="landscape-minimize" aria-label="Exit fullscreen">
+        <img class="landscape-minimize-logo" src="../images/pizzalogo.png" alt="">
+        <svg class="landscape-minimize-chevron" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 5.5 8.5 12 15 18.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    </button>
+
+    <div class="fullscreen-game-bar" id="fullscreen-game-bar">
+        <div class="fullscreen-game-bar-left">
+            <picture>
+                <source srcset="../avifgames/awsometanks.avif" type="image/avif">
+                <img class="fullscreen-game-bar-icon" src="../apnggames/awsometanks.png" alt="Awesome Tanks 2 icon">
+            </picture>
+            <div class="fullscreen-game-bar-title">Awesome Tanks 2</div>
+        </div>
+        <button type="button" id="hide-bar-btn" aria-label="Hide this bar">
+            <svg class="hide-bar-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"></path>
+            </svg>
+            <span class="hide-bar-label">Hide this bar</span>
+        </button>
+        <button type="button" id="minimize-btn" aria-label="Minimize">
+            <svg class="minimize-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 4l-6.5 6.5M13.5 5v5.5H19"></path>
+                <path d="M4 20l6.5-6.5M10.5 19v-5.5H5"></path>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const iframe = document.getElementById('gameframe');
+        const loader = document.getElementById('loader');
+
+        function hideLoadingScreen() {
+            if (loader) {
+                loader.remove();
+            }
+        }
+
+        if (iframe) {
+            iframe.addEventListener('load', hideLoadingScreen);
+
+            setTimeout(() => {
+                hideLoadingScreen();
+            }, 5000);
+        } else {
+            setTimeout(() => {
+                hideLoadingScreen();
+            }, 2000);
+        }
+
+        (function () {
+            function hasFullscreenElement(doc) {
+                return Boolean(
+                    doc.fullscreenElement ||
+                    doc.webkitFullscreenElement ||
+                    doc.mozFullScreenElement ||
+                    doc.msFullscreenElement
+                );
+            }
+
+            function isFrameFullscreenInTop() {
+                try {
+                    if (!window.top || !window.frameElement) return false;
+                    const topDoc = window.top.document;
+                    const fullscreenHost =
+                        topDoc.fullscreenElement ||
+                        topDoc.webkitFullscreenElement ||
+                        topDoc.mozFullScreenElement ||
+                        topDoc.msFullscreenElement;
+
+                    if (!fullscreenHost) return false;
+
+                    return (
+                        fullscreenHost === window.frameElement ||
+                        (typeof fullscreenHost.contains === "function" && fullscreenHost.contains(window.frameElement))
+                    );
+                } catch (_) {
+                    return false;
+                }
+            }
+
+            // The host page can force the bar on: iPhone Safari has no element
+            // Fullscreen API, so /g/ pages there open us in a pseudo-fullscreen
+            // and say so with ?fs=1, then toggle it over postMessage.
+            let forcedFullscreen = /[?&]fs=1(?:&|$)/.test(window.location.search);
+
+            function isGameFullscreen() {
+                return forcedFullscreen || hasFullscreenElement(document) || isFrameFullscreenInTop();
+            }
+
+            // "Hide this bar" lasts for the current fullscreen stint only; the
+            // bar comes back the next time fullscreen is entered.
+            let barHidden = false;
+
+            function syncFullscreenClass() {
+                const fullscreen = isGameFullscreen();
+                if (!fullscreen) barHidden = false;
+                document.body.classList.toggle("is-game-fullscreen", fullscreen);
+                document.body.classList.toggle("is-forced-fullscreen", forcedFullscreen);
+                document.body.classList.toggle("is-bar-hidden", fullscreen && barHidden);
+            }
+
+            async function exitFullscreenAnyContext() {
+                if (hasFullscreenElement(document)) {
+                    if (document.exitFullscreen) return document.exitFullscreen();
+                    if (document.webkitExitFullscreen) return document.webkitExitFullscreen();
+                    if (document.mozCancelFullScreen) return document.mozCancelFullScreen();
+                    if (document.msExitFullscreen) return document.msExitFullscreen();
+                }
+
+                try {
+                    if (window.top && window.frameElement) {
+                        const topDoc = window.top.document;
+                        const fullscreenHost =
+                            topDoc.fullscreenElement ||
+                            topDoc.webkitFullscreenElement ||
+                            topDoc.mozFullScreenElement ||
+                            topDoc.msFullscreenElement;
+                        const ownsFrame =
+                            fullscreenHost &&
+                            (fullscreenHost === window.frameElement ||
+                                (typeof fullscreenHost.contains === "function" && fullscreenHost.contains(window.frameElement)));
+
+                        if (ownsFrame && topDoc.exitFullscreen) {
+                            return topDoc.exitFullscreen();
+                        }
+                        if (ownsFrame && topDoc.webkitExitFullscreen) {
+                            return topDoc.webkitExitFullscreen();
+                        }
+                        if (ownsFrame && topDoc.mozCancelFullScreen) {
+                            return topDoc.mozCancelFullScreen();
+                        }
+                        if (ownsFrame && topDoc.msExitFullscreen) {
+                            return topDoc.msExitFullscreen();
+                        }
+                    }
+                } catch (_) {}
+            }
+
+            async function minimizeGame() {
+                try {
+                    await exitFullscreenAnyContext();
+                } catch (_) {}
+                if (forcedFullscreen) {
+                    forcedFullscreen = false;
+                    try {
+                        window.parent.postMessage({ type: "pe-exit-fullscreen" }, window.location.origin);
+                    } catch (_) {}
+                }
+                syncFullscreenClass();
+            }
+
+            // The bottom bar's button and the landscape edge tab do the same job.
+            ["minimize-btn", "landscape-minimize-btn"].forEach(function (id) {
+                const btn = document.getElementById(id);
+                if (btn) btn.addEventListener("click", minimizeGame);
+            });
+
+            const hideBarBtn = document.getElementById("hide-bar-btn");
+            if (hideBarBtn) {
+                hideBarBtn.addEventListener("click", function () {
+                    if (forcedFullscreen) return;
+                    barHidden = true;
+                    syncFullscreenClass();
+                });
+            }
+
+            window.addEventListener("message", function (event) {
+                if (event.origin !== window.location.origin) return;
+                if (!event.data || event.data.type !== "pe-force-fullscreen") return;
+                forcedFullscreen = Boolean(event.data.value);
+                syncFullscreenClass();
+            });
+
+            document.addEventListener("fullscreenchange", syncFullscreenClass);
+            document.addEventListener("webkitfullscreenchange", syncFullscreenClass);
+            document.addEventListener("mozfullscreenchange", syncFullscreenClass);
+            document.addEventListener("MSFullscreenChange", syncFullscreenClass);
+
+            try {
+                if (window.top && window.top.document) {
+                    window.top.document.addEventListener("fullscreenchange", syncFullscreenClass);
+                    window.top.document.addEventListener("webkitfullscreenchange", syncFullscreenClass);
+                    window.top.document.addEventListener("mozfullscreenchange", syncFullscreenClass);
+                    window.top.document.addEventListener("MSFullscreenChange", syncFullscreenClass);
+                }
+            } catch (_) {}
+
+            syncFullscreenClass();
+        })();
+    </script>
+
+<script src="../jsload/applixir-parent-bridge%EF%B9%96v=6.js" defer=""></script>
+<script src="../jsload/backtotop%EF%B9%96v=2.js" defer=""></script>
+<script type="module" src="../../static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495.js" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;e4fe5c4a5ec14623bb7dd4affab57660&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}"></script>
+
+
+<button id="backToTop" class="back-to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></button></body></html>
